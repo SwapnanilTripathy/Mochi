@@ -6,7 +6,7 @@ let moveTimer;
 let target = null;
 let direction = 1;
 
-const PET_SIZE = 96;
+const PET_SIZE = 82;
 const SPEED = 1.2;
 const TICK_MS = 30;
 
@@ -73,7 +73,8 @@ function createPet() {
     alwaysOnTop: true,
     hasShadow: false,
     skipTaskbar: true,
-    backgroundColor: "#00000000",
+    backgroundColor: "rgba(0,0,0,0)",
+    paintWhenInitiallyHidden: false,
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
