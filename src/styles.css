@@ -4,7 +4,7 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden;
-  background: transparent;
+  background: transparent !important;
 }
 
 body {
@@ -15,57 +15,36 @@ body {
 
 .pet {
   position: relative;
-  width: 96px;
-  height: 96px;
-  animation: float 2.4s ease-in-out infinite;
+  width: 82px;
+  height: 82px;
+  animation: float 2.6s ease-in-out infinite;
   cursor: pointer;
 }
 
 .mochi {
   position: absolute;
-  left: 4px;
-  top: 5px;
-  width: 88px;
-  height: 88px;
+  left: 1px;
+  top: 1px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
   transform-origin: center bottom;
-  filter: drop-shadow(0 5px 3px rgba(20, 28, 42, 0.18));
+  filter: drop-shadow(0 3px 3px rgba(20, 28, 42, 0.16));
+  transition: transform 180ms ease;
 }
 
-.sparkle {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0;
-  color: #6f7e96;
-  font-size: 11px;
-  animation: twinkle 2.8s ease-in-out infinite;
+.walk-left .mochi { transform: scaleX(-1); }
+.walk-right .mochi { transform: scaleX(1); }
+
+.pet:hover .mochi {
+  transform: translateY(-2px) scale(1.04);
 }
 
-.sparkle-one {
-  top: 10px;
-  right: 7px;
-}
-
-.sparkle-two {
-  top: 25px;
-  right: 1px;
-  animation-delay: 1.1s;
-}
-
-.walk-left .mochi {
-  transform: scaleX(-1);
-}
-
-.walk-right .mochi {
-  transform: scaleX(1);
+.walk-left:hover .mochi {
+  transform: translateY(-2px) scaleX(-1) scale(1.04);
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-2px); }
-}
-
-@keyframes twinkle {
-  0%, 65%, 100% { opacity: 0; transform: scale(.6); }
-  75%, 88% { opacity: .75; transform: scale(1); }
 }
