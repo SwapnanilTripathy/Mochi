@@ -1,18 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-  <g stroke="#293445" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path fill="#aeb8c7" d="M28 43 31 15l25 20Z"/>
-    <path fill="#aeb8c7" d="M92 43 89 15 64 35Z"/>
-    <path fill="#dfe4e9" d="M25 49c0-23 15-36 35-36s35 13 35 36v24c0 17-14 28-35 28S25 90 25 73Z"/>
-    <path fill="#eef1f4" d="M38 71c-3 14 8 27 22 27s25-13 22-27c-5 5-12 8-22 8s-17-3-22-8Z"/>
-    <path fill="#394456" d="M25 49c0-15 8-27 20-32v14c-5 3-8 9-8 18Z"/>
-    <path fill="#394456" d="M95 49c0-15-8-27-20-32v14c5 3 8 9 8 18Z"/>
-    <ellipse fill="#394456" cx="26" cy="54" rx="9" ry="14"/>
-    <ellipse fill="#394456" cx="94" cy="54" rx="9" ry="14"/>
-    <ellipse fill="#172033" cx="45" cy="55" rx="4.5" ry="6"/>
-    <ellipse fill="#172033" cx="75" cy="55" rx="4.5" ry="6"/>
-    <path fill="#172033" d="M56 67c0-4 8-4 8 0 0 3-4 5-4 5s-4-2-4-5Z"/>
-    <path fill="none" d="M60 72v6m0 0c-4 2-7 0-8-2m8 2c4 2 7 0 8-2"/>
-    <path fill="#d5dbe2" d="M34 91c-8 6-14 12-9 17 7 7 17-2 21-8Z"/>
-    <path fill="#d5dbe2" d="M86 91c8 6 14 12 9 17-7 7-17-2-21-8Z"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <linearGradient id="fur" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef1f4"/>
+      <stop offset="1" stop-color="#cbd2dc"/>
+    </linearGradient>
+    <linearGradient id="shadowFur" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c5cdd8"/>
+      <stop offset="1" stop-color="#aab5c3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- fluffy ears -->
+  <path d="M42 55 C29 43 28 25 39 13 C42 9 48 11 53 16 L68 36 Z"
+        fill="url(#shadowFur)" stroke="#303b4d" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M118 55 C131 43 132 25 121 13 C118 9 112 11 107 16 L92 36 Z"
+        fill="url(#shadowFur)" stroke="#303b4d" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- inner ears -->
+  <path d="M40 38 C38 29 40 22 44 19 L58 38 Z" fill="#e5e8ed"/>
+  <path d="M120 38 C122 29 120 22 116 19 L102 38 Z" fill="#e5e8ed"/>
+
+  <!-- body -->
+  <path d="M48 111 C38 116 32 130 38 142 C43 151 55 146 61 137
+           C67 144 93 144 99 137 C105 146 117 151 122 142
+           C128 130 122 116 112 111 Z"
+        fill="url(#fur)" stroke="#303b4d" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- head -->
+  <path d="M42 60 C42 36 57 24 80 24 C103 24 118 36 118 60
+           C118 91 103 112 80 112 C57 112 42 91 42 60 Z"
+        fill="url(#fur)" stroke="#303b4d" stroke-width="4"/>
+
+  <!-- forehead fluff -->
+  <path d="M61 31 L67 22 L75 30 L80 20 L85 30 L94 22 L99 33"
+        fill="none" stroke="#303b4d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- headphones -->
+  <path d="M47 63 C42 47 53 32 67 28" fill="none" stroke="#3d485b" stroke-width="9" stroke-linecap="round"/>
+  <path d="M113 63 C118 47 107 32 93 28" fill="none" stroke="#3d485b" stroke-width="9" stroke-linecap="round"/>
+  <rect x="36" y="56" width="17" height="31" rx="9" fill="#465166" stroke="#303b4d" stroke-width="4"/>
+  <rect x="107" y="56" width="17" height="31" rx="9" fill="#465166" stroke="#303b4d" stroke-width="4"/>
+
+  <!-- eyes: open and cute -->
+  <ellipse cx="63" cy="63" rx="6.5" ry="9" fill="#202a3a"/>
+  <ellipse cx="97" cy="63" rx="6.5" ry="9" fill="#202a3a"/>
+  <circle cx="65" cy="60" r="2.2" fill="#ffffff"/>
+  <circle cx="99" cy="60" r="2.2" fill="#ffffff"/>
+
+  <!-- cheeks -->
+  <ellipse cx="53" cy="77" rx="9" ry="5" fill="#c0c9d5" opacity=".75"/>
+  <ellipse cx="107" cy="77" rx="9" ry="5" fill="#c0c9d5" opacity=".75"/>
+
+  <!-- muzzle -->
+  <path d="M61 75 C65 69 75 68 80 74 C85 68 95 69 99 75
+           C98 87 91 94 80 94 C69 94 62 87 61 75 Z"
+        fill="#f4f5f6"/>
+
+  <!-- nose and smile -->
+  <path d="M75 75 C75 71 85 71 85 75 C85 79 80 81 80 81 C80 81 75 79 75 75 Z"
+        fill="#273243"/>
+  <path d="M80 80 L80 84 M80 84 C75 89 70 86 68 83 M80 84 C85 89 90 86 92 83"
+        fill="none" stroke="#273243" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- tiny paws -->
+  <path d="M57 119 C48 123 45 132 51 136 C57 140 64 132 66 125 Z"
+        fill="#eef1f4" stroke="#303b4d" stroke-width="4"/>
+  <path d="M103 119 C112 123 115 132 109 136 C103 140 96 132 94 125 Z"
+        fill="#eef1f4" stroke="#303b4d" stroke-width="4"/>
 </svg>
