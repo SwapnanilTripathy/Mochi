@@ -1,0 +1,123 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+body {
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.pet {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+.head {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 56px;
+  height: 50px;
+  border-radius: 48% 48% 44% 44%;
+  background: #d9dee5;
+  border: 3px solid #293445;
+  box-sizing: border-box;
+}
+
+.ear {
+  position: absolute;
+  top: 13px;
+  width: 25px;
+  height: 28px;
+  background: #aeb8c7;
+  border: 3px solid #293445;
+  transform: rotate(16deg);
+  z-index: -1;
+}
+
+.ear.left { left: 18px; border-radius: 75% 15% 50% 25%; }
+.ear.right { right: 18px; transform: rotate(-16deg); border-radius: 15% 75% 25% 50%; }
+
+.face {
+  position: absolute;
+  inset: 0;
+}
+
+.eye {
+  position: absolute;
+  top: 18px;
+  width: 7px;
+  height: 9px;
+  border-radius: 50%;
+  background: #172033;
+}
+
+.left-eye { left: 16px; }
+.right-eye { right: 16px; }
+
+.nose {
+  position: absolute;
+  left: 24px;
+  top: 29px;
+  width: 9px;
+  height: 7px;
+  background: #172033;
+  border-radius: 55% 55% 60% 60%;
+}
+
+.mouth {
+  position: absolute;
+  left: 28px;
+  top: 35px;
+  width: 3px;
+  height: 6px;
+  background: #172033;
+  border-radius: 2px;
+}
+
+.headphone {
+  position: absolute;
+  top: 24px;
+  width: 12px;
+  height: 23px;
+  background: #394456;
+  border-radius: 8px;
+}
+
+.left-phone { left: 13px; }
+.right-phone { right: 13px; }
+
+.body {
+  position: absolute;
+  left: 22px;
+  top: 61px;
+  width: 51px;
+  height: 29px;
+  border-radius: 45% 45% 38% 38%;
+  background: #eef1f4;
+  border: 3px solid #293445;
+  box-sizing: border-box;
+}
+
+.tail {
+  position: absolute;
+  left: 66px;
+  top: 63px;
+  width: 22px;
+  height: 20px;
+  border: 7px solid #c5ced8;
+  border-left-color: transparent;
+  border-radius: 60%;
+  transform: rotate(-25deg);
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
