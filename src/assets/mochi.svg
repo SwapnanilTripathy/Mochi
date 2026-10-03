@@ -1,70 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-  <defs>
-    <linearGradient id="fur" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#eef1f4"/>
-      <stop offset="1" stop-color="#cbd2dc"/>
-    </linearGradient>
-    <linearGradient id="shadowFur" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#c5cdd8"/>
-      <stop offset="1" stop-color="#aab5c3"/>
-    </linearGradient>
-  </defs>
-
-  <!-- fluffy ears -->
-  <path d="M42 55 C29 43 28 25 39 13 C42 9 48 11 53 16 L68 36 Z"
-        fill="url(#shadowFur)" stroke="#303b4d" stroke-width="4" stroke-linejoin="round"/>
-  <path d="M118 55 C131 43 132 25 121 13 C118 9 112 11 107 16 L92 36 Z"
-        fill="url(#shadowFur)" stroke="#303b4d" stroke-width="4" stroke-linejoin="round"/>
-
-  <!-- inner ears -->
-  <path d="M40 38 C38 29 40 22 44 19 L58 38 Z" fill="#e5e8ed"/>
-  <path d="M120 38 C122 29 120 22 116 19 L102 38 Z" fill="#e5e8ed"/>
-
-  <!-- body -->
-  <path d="M48 111 C38 116 32 130 38 142 C43 151 55 146 61 137
-           C67 144 93 144 99 137 C105 146 117 151 122 142
-           C128 130 122 116 112 111 Z"
-        fill="url(#fur)" stroke="#303b4d" stroke-width="4" stroke-linejoin="round"/>
-
-  <!-- head -->
-  <path d="M42 60 C42 36 57 24 80 24 C103 24 118 36 118 60
-           C118 91 103 112 80 112 C57 112 42 91 42 60 Z"
-        fill="url(#fur)" stroke="#303b4d" stroke-width="4"/>
-
-  <!-- forehead fluff -->
-  <path d="M61 31 L67 22 L75 30 L80 20 L85 30 L94 22 L99 33"
-        fill="none" stroke="#303b4d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- headphones -->
-  <path d="M47 63 C42 47 53 32 67 28" fill="none" stroke="#3d485b" stroke-width="9" stroke-linecap="round"/>
-  <path d="M113 63 C118 47 107 32 93 28" fill="none" stroke="#3d485b" stroke-width="9" stroke-linecap="round"/>
-  <rect x="36" y="56" width="17" height="31" rx="9" fill="#465166" stroke="#303b4d" stroke-width="4"/>
-  <rect x="107" y="56" width="17" height="31" rx="9" fill="#465166" stroke="#303b4d" stroke-width="4"/>
-
-  <!-- eyes: open and cute -->
-  <ellipse cx="63" cy="63" rx="6.5" ry="9" fill="#202a3a"/>
-  <ellipse cx="97" cy="63" rx="6.5" ry="9" fill="#202a3a"/>
-  <circle cx="65" cy="60" r="2.2" fill="#ffffff"/>
-  <circle cx="99" cy="60" r="2.2" fill="#ffffff"/>
-
-  <!-- cheeks -->
-  <ellipse cx="53" cy="77" rx="9" ry="5" fill="#c0c9d5" opacity=".75"/>
-  <ellipse cx="107" cy="77" rx="9" ry="5" fill="#c0c9d5" opacity=".75"/>
-
-  <!-- muzzle -->
-  <path d="M61 75 C65 69 75 68 80 74 C85 68 95 69 99 75
-           C98 87 91 94 80 94 C69 94 62 87 61 75 Z"
-        fill="#f4f5f6"/>
-
-  <!-- nose and smile -->
-  <path d="M75 75 C75 71 85 71 85 75 C85 79 80 81 80 81 C80 81 75 79 75 75 Z"
-        fill="#273243"/>
-  <path d="M80 80 L80 84 M80 84 C75 89 70 86 68 83 M80 84 C85 89 90 86 92 83"
-        fill="none" stroke="#273243" stroke-width="3" stroke-linecap="round"/>
-
-  <!-- tiny paws -->
-  <path d="M57 119 C48 123 45 132 51 136 C57 140 64 132 66 125 Z"
-        fill="#eef1f4" stroke="#303b4d" stroke-width="4"/>
-  <path d="M103 119 C112 123 115 132 109 136 C103 140 96 132 94 125 Z"
-        fill="#eef1f4" stroke="#303b4d" stroke-width="4"/>
+<defs>
+  <linearGradient id="fur" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5f6f7"/><stop offset=".58" stop-color="#d7dce3"/><stop offset="1" stop-color="#b7c0cc"/></linearGradient>
+  <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#465267"/><stop offset="1" stop-color="#252f40"/></linearGradient>
+</defs>
+<!-- tail -->
+<path d="M112 119 C137 108 148 120 142 136 C138 147 122 145 111 136 C122 138 130 133 132 127 C128 124 120 125 112 131Z" fill="#c4ccd6" stroke="#273244" stroke-width="4" stroke-linejoin="round"/>
+<!-- body -->
+<path d="M48 94 C35 103 34 124 44 136 C52 146 69 145 80 135 C91 145 109 146 117 136 C127 124 124 103 111 94 C97 84 62 84 48 94Z" fill="url(#fur)" stroke="#273244" stroke-width="4"/>
+<!-- chest ruff -->
+<path d="M60 91 L66 99 L72 94 L80 103 L88 94 L95 99 L101 91 C100 113 92 128 80 132 C68 128 60 113 60 91Z" fill="#f7f8f9" opacity=".9"/>
+<!-- ears -->
+<path d="M43 55 C32 45 29 27 39 14 C43 9 49 13 56 20 L70 39Z" fill="url(#fur)" stroke="#273244" stroke-width="4"/>
+<path d="M117 55 C128 45 131 27 121 14 C117 9 111 13 104 20 L90 39Z" fill="url(#fur)" stroke="#273244" stroke-width="4"/>
+<path d="M41 35 C39 27 40 21 44 19 L56 36Z" fill="#9da8b7"/>
+<path d="M119 35 C121 27 120 21 116 19 L104 36Z" fill="#9da8b7"/>
+<!-- head -->
+<path d="M42 59 C42 35 57 22 80 22 C103 22 118 35 118 59 C118 89 104 108 80 110 C56 108 42 89 42 59Z" fill="url(#fur)" stroke="#273244" stroke-width="4"/>
+<!-- dark crown marking -->
+<path d="M49 43 C55 27 67 22 80 22 C93 22 105 27 111 43 C100 37 91 34 80 34 C69 34 60 37 49 43Z" fill="#596577" opacity=".75"/>
+<!-- headphones band -->
+<path d="M49 61 C43 39 58 22 80 22 C102 22 117 39 111 61" fill="none" stroke="#252f40" stroke-width="9" stroke-linecap="round"/>
+<path d="M48 61 C45 47 54 35 66 30" fill="none" stroke="#566176" stroke-width="3" opacity=".8"/>
+<path d="M112 61 C115 47 106 35 94 30" fill="none" stroke="#566176" stroke-width="3" opacity=".8"/>
+<!-- headphone cups -->
+<rect x="35" y="52" width="19" height="34" rx="10" fill="url(#dark)" stroke="#273244" stroke-width="4"/>
+<rect x="106" y="52" width="19" height="34" rx="10" fill="url(#dark)" stroke="#273244" stroke-width="4"/>
+<path d="M40 61 Q45 57 50 61" fill="none" stroke="#6f7b8e" stroke-width="2"/>
+<path d="M110 61 Q115 57 120 61" fill="none" stroke="#6f7b8e" stroke-width="2"/>
+<!-- closed cute eyes -->
+<path d="M55 63 Q62 69 69 63" fill="none" stroke="#273244" stroke-width="4" stroke-linecap="round"/>
+<path d="M91 63 Q98 69 105 63" fill="none" stroke="#273244" stroke-width="4" stroke-linecap="round"/>
+<!-- cheek marks -->
+<path d="M51 76 l-6 2 M52 80 l-6 2 M109 76 l6 2 M108 80 l6 2" stroke="#8e99a8" stroke-width="2.5" stroke-linecap="round"/>
+<!-- muzzle -->
+<path d="M61 75 C66 70 74 70 80 76 C86 70 94 70 99 75 C98 88 91 95 80 95 C69 95 62 88 61 75Z" fill="#f7f8f9"/>
+<path d="M75 77 Q80 73 85 77 Q85 82 80 84 Q75 82 75 77Z" fill="#273244"/>
+<path d="M80 83 L80 87 M80 87 Q74 92 69 87 M80 87 Q86 92 91 87" fill="none" stroke="#273244" stroke-width="3" stroke-linecap="round"/>
+<!-- little paws -->
+<path d="M48 119 C42 126 44 135 51 137 C58 139 63 131 62 124Z" fill="#f2f4f6" stroke="#273244" stroke-width="4"/>
+<path d="M112 119 C118 126 116 135 109 137 C102 139 97 131 98 124Z" fill="#f2f4f6" stroke="#273244" stroke-width="4"/>
 </svg>
