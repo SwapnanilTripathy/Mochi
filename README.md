@@ -2,20 +2,36 @@
 
 A tiny interactive desktop companion for Windows.
 
-Mochi is designed to live quietly on your screen as a small, cute character with transparent rendering, simple animations, and mouse interaction.
+## Phase 1
+
+- Transparent always-on-top pet window
+- Tiny 96×96 desktop footprint
+- Cute gray/white headphone character
+- Automatic wandering around the usable desktop area
+- Direction-aware movement
+- Cursor hover reaction
+- Right-click controls
+- Pause/resume movement
+- Stay here
+- Exit from the context menu
+
+## Run locally
+
+```bash
+npm install
+npm start
+```
 
 ## Roadmap
 
-- [ ] Phase 1: Tiny transparent desktop pet
-- [ ] Phase 2: Idle, walk, sit, stretch, jump animations
-- [ ] Phase 3: Cursor and drag interaction
-- [ ] Phase 4: System tray and settings
-- [ ] Phase 5: Windows installer
-
-## Tech
-
-Electron + JavaScript
-
-## Development
-
-Coming next.
+- [x] Transparent desktop pet
+- [x] Basic wandering
+- [x] Open-eye Mochi character
+- [x] Right-click controls
+- [ ] Sprite-based walk animation
+- [ ] Sit / stretch / jump animations
+- [ ] Drag Mochi
+- [ ] Taskbar and window-edge behavior
+- [ ] System tray
+- [ ] Settings
+- [ ] Windows installer
