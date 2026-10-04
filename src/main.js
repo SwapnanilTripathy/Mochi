@@ -10,6 +10,7 @@ let paused = false;
 let sleeping = false;
 let dragging = false;
 let edgeSitting = false;
+let curious = false;
 
 const PET_SIZE = 86;
 const MIN_SPEED = 0.45;
@@ -51,6 +52,30 @@ function chooseTarget() {
 
 function moveMochi() {
   if (!petWindow || petWindow.isDestroyed() || paused || sleeping || edgeSitting) return;
+
+  const [mx, my] = screen.getCursorScreenPoint();
+  const [px, py] = petWindow.getPosition();
+  const cx = px + PET_SIZE / 2;
+  const cy = py + PET_SIZE / 2;
+  const cursorDistance = Math.hypot(mx - cx, my - cy);
+
+  if (cursorDistance < 150) {
+    if (!curious) {
+      curious = true;
+      target = null;
+      clearInterval(moveTimer);
+      send("curious");
+    }
+    direction = mx < cx ? -1 : 1;
+    petWindow.webContents.send("mochi-direction", direction);
+    return;
+  }
+
+  if (curious) {
+    curious = false;
+    send("idle");
+    chooseTarget();
+  }
   if (!target) chooseTarget();
 
   const [x, y] = petWindow.getPosition();
@@ -92,6 +117,7 @@ function moveMochi() {
 function startMovement() {
   paused = false;
   sleeping = false;
+  curious = false;
   clearInterval(moveTimer);
   chooseTarget();
   send("idle");
@@ -101,6 +127,7 @@ function startMovement() {
 function pauseMovement() {
   paused = true;
   dragging = false;
+  curious = false;
   target = null;
   clearInterval(moveTimer);
   send("idle");
