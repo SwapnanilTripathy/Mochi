@@ -70,6 +70,15 @@ pet.addEventListener("click", () => {
   pet.classList.remove("pat");
   void pet.offsetWidth;
   pet.classList.add("pat");
+
+  // Tiny affection reaction without changing the approved artwork.
+  const heart = document.createElement("span");
+  heart.className = "heart";
+  heart.textContent = "♥";
+  heart.style.left = `${38 + Math.random() * 12}px`;
+  heart.style.top = "18px";
+  pet.appendChild(heart);
+  setTimeout(() => heart.remove(), 900);
 });
 
 pet.addEventListener("dblclick", () => {
