@@ -21,7 +21,7 @@ function render() {
 }
 
 function setState(next) {
-  state = ["idle", "walk", "sleep", "stretch", "drag"].includes(next) ? next : "idle";
+  state = ["idle", "walk", "sleep", "stretch", "drag", "edge"].includes(next) ? next : "idle";
   frame = 0;
   render();
   restartAnimation();
@@ -29,8 +29,13 @@ function setState(next) {
 
 function restartAnimation() {
   clearInterval(timer);
-  const speed = state === "walk" ? 110 : state === "idle" ? 240 : state === "drag" ? 180 : 320;
+  const speed = state === "walk" ? 110 : state === "idle" ? 240 : state === "drag" ? 180 : state === "edge" ? 360 : 320;
   timer = setInterval(() => {
+    if (state === "edge") {
+      frame = (frame + 1) % frames.idle.length;
+      render();
+      return;
+    }
     if (state === "sleep") {
       frame = (frame + 1) % 2;
       sprite.src = frames.idle[frame];
