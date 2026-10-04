@@ -5,6 +5,12 @@ body{-webkit-app-region:no-drag;user-select:none}
 .idle{animation:breathe 2.8s ease-in-out infinite}
 .walk{animation:walkBob .42s ease-in-out infinite}
 .look{animation:look 1.4s ease-in-out infinite}
-@keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+.sleep{animation:sleep 2.8s ease-in-out infinite}
+.stretch{animation:stretch 1.8s ease-in-out infinite}
+.pat{animation:pat .42s cubic-bezier(.2,.9,.25,1.4)}
+@keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1.5px) scale(1.015)}}
 @keyframes walkBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
-@keyframes look{0%,100%{transform:rotate(0)}50%{transform:rotate(-2deg)}}
+@keyframes look{0%,100%{transform:rotate(0) translateY(0)}50%{transform:rotate(-3deg) translateY(-1px)}}
+@keyframes sleep{0%,100%{transform:translateY(2px) scaleY(.92)}50%{transform:translateY(4px) scaleY(.86)}}
+@keyframes stretch{0%,100%{transform:scale(1)}45%{transform:scaleX(1.08) scaleY(.94)}}
+@keyframes pat{0%{transform:translateY(0) scale(1)}40%{transform:translateY(-5px) scale(1.06)}100%{transform:translateY(0) scale(1)}}
