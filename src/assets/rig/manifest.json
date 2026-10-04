@@ -1,0 +1,138 @@
+{
+  "canvas": [
+    629,
+    630
+  ],
+  "z_order_back_to_front": [
+    "body",
+    "head",
+    "left-ear",
+    "right-ear",
+    "muzzle",
+    "left-eye",
+    "right-eye",
+    "headphone-band",
+    "headphone-left-cup",
+    "headphone-right-cup",
+    "left-arm",
+    "right-arm",
+    "headphone-details",
+    "mouth",
+    "eye-closed-left",
+    "eye-closed-right"
+  ],
+  "layers": {
+    "body": {
+      "file": "body.png",
+      "x": 26,
+      "y": -40,
+      "w": 590,
+      "h": 670
+    },
+    "head": {
+      "file": "head.png",
+      "x": 154,
+      "y": 112,
+      "w": 308,
+      "h": 378
+    },
+    "left-ear": {
+      "file": "left-ear.png",
+      "x": 136,
+      "y": 2,
+      "w": 235,
+      "h": 224
+    },
+    "right-ear": {
+      "file": "right-ear.png",
+      "x": 282,
+      "y": 40,
+      "w": 290,
+      "h": 263
+    },
+    "muzzle": {
+      "file": "muzzle.png",
+      "x": 157,
+      "y": 258,
+      "w": 234,
+      "h": 231
+    },
+    "left-eye": {
+      "file": "left-eye.png",
+      "x": 120,
+      "y": 242,
+      "w": 157,
+      "h": 149
+    },
+    "right-eye": {
+      "file": "right-eye.png",
+      "x": 265,
+      "y": 244,
+      "w": 142,
+      "h": 147
+    },
+    "headphone-band": {
+      "file": "headphone-band.png",
+      "x": 150,
+      "y": 76,
+      "w": 279,
+      "h": 154
+    },
+    "headphone-left-cup": {
+      "file": "headphone-left-cup.png",
+      "x": 102,
+      "y": 123,
+      "w": 142,
+      "h": 196
+    },
+    "headphone-right-cup": {
+      "file": "headphone-right-cup.png",
+      "x": 332,
+      "y": 132,
+      "w": 214,
+      "h": 227
+    },
+    "left-arm": {
+      "file": "left-arm.png",
+      "x": 28,
+      "y": 205,
+      "w": 243,
+      "h": 388
+    },
+    "right-arm": {
+      "file": "right-arm.png",
+      "x": 358,
+      "y": 160,
+      "w": 214,
+      "h": 439
+    },
+    "headphone-details": {
+      "file": "headphone-details.png",
+      "x": 130,
+      "y": 98,
+      "w": 329,
+      "h": 175
+    },
+    "mouth": {
+      "file": "mouth.png",
+      "x": 206,
+      "y": 343,
+      "w": 176,
+      "h": 140
+    },
+    "eye-closed-left": {
+      "file": "eye-closed-left.png",
+      "x": 145,
+      "y": 268,
+      "w": 122,
+      "h": 118
+    },
+    "eye-closed-right": {
+      "file": "eye-closed-right.png",
+      "x": 265,
+      "y": 276,
+      "w": 134,
+      "h": 113
+    }
+  }
+}
