@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen, Menu } = require("electron");
+const { app, BrowserWindow, screen, Menu, Tray } = require("electron");
 const path = require("path");
 const fs = require("fs");
 
@@ -13,6 +13,7 @@ let dragging = false;
 let edgeSitting = false;
 let curious = false;
 let savedPosition = null;
+let tray = null;
 
 const PET_SIZE = 86;
 const MIN_SPEED = 0.45;
@@ -36,6 +37,29 @@ function savePosition() {
     fs.mkdirSync(path.dirname(POSITION_FILE), { recursive: true });
     fs.writeFileSync(POSITION_FILE, JSON.stringify({ x, y }));
   } catch {}
+}
+
+function createTray() {
+  if (tray) return;
+  tray = new Tray(path.join(__dirname, "assets", "mochi.svg"));
+  tray.setToolTip("Mochi 🐺");
+  tray.setContextMenu(Menu.buildFromTemplate([
+    { label: "Show Mochi", click: () => {
+      petWindow?.show();
+      petWindow?.focus();
+    }},
+    { label: "Pause wandering", click: () => pauseMovement() },
+    { label: "Resume wandering", click: () => startMovement() },
+    { label: "Take a nap", click: () => nap() },
+    { type: "separator" },
+    { label: "Reset position", click: () => resetPosition() },
+    { type: "separator" },
+    { label: "Quit Mochi", click: () => app.quit() }
+  ]));
+  tray.on("double-click", () => {
+    petWindow?.show();
+    petWindow?.focus();
+  });
 }
 
 function resetPosition() {
@@ -242,6 +266,7 @@ function createPet() {
   });
 
   petWindow.setMenuBarVisibility(false);
+  createTray();
   petWindow.loadFile(path.join(__dirname, "index.html"));
 
   petWindow.webContents.once("did-finish-load", () => {
