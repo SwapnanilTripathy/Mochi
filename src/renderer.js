@@ -29,7 +29,7 @@ function setState(next) {
 
 function restartAnimation() {
   clearInterval(timer);
-  const speed = state === "walk" ? 110 : state === "idle" ? 240 : state === "drag" ? 180 : state === "edge" ? 360 : 320;
+  const speed = state === "walk" ? 110 : state === "idle" ? 240 : state === "drag" ? 180 : state === "edge" ? 360 : state === "curious" ? 260 : 320;
   timer = setInterval(() => {
     if (state === "edge") {
       frame = (frame + 1) % frames.idle.length;
