@@ -41,7 +41,7 @@ function savePosition() {
 
 function createTray() {
   if (tray) return;
-  tray = new Tray(path.join(__dirname, "assets", "mochi.svg"));
+  tray = new Tray(path.join(__dirname, "assets", "idle", "idle-1.png"));
   tray.setToolTip("Mochi 🐺");
   tray.setContextMenu(Menu.buildFromTemplate([
     { label: "Show Mochi", click: () => {
