@@ -67,8 +67,22 @@ function moveMochi() {
       target = null;
       send("curious");
     }
+
     direction = mx < cx ? -1 : 1;
     petWindow.webContents.send("mochi-direction", direction);
+
+    // Slowly approach the cursor, but stop at a comfortable distance.
+    if (cursorDistance > 72) {
+      const dx = mx - cx;
+      const dy = my - cy;
+      const distance = Math.max(1, cursorDistance);
+      const step = Math.min(0.65, distance - 72);
+      petWindow.setPosition(
+        Math.round(px + (dx / distance) * step),
+        Math.round(py + (dy / distance) * step),
+        false
+      );
+    }
     return;
   }
 
