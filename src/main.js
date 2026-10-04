@@ -8,6 +8,7 @@ let target = null;
 let direction = 1;
 let paused = false;
 let sleeping = false;
+let dragging = false;
 
 const PET_SIZE = 86;
 const MIN_SPEED = 0.45;
@@ -71,6 +72,7 @@ function startMovement() {
 
 function pauseMovement() {
   paused = true;
+  dragging = false;
   target = null;
   clearInterval(moveTimer);
   send("idle");
@@ -148,9 +150,31 @@ function createPet() {
     petWindow = null;
   });
 
-  petWindow.webContents.on("ipc-message", (_event, channel) => {
+  petWindow.webContents.on("ipc-message", (_event, channel, ...args) => {
     if (channel === "mochi-pause") pauseMovement();
     if (channel === "mochi-nap") nap();
+
+    if (channel === "mochi-drag-start") {
+      dragging = true;
+      paused = true;
+      sleeping = false;
+      target = null;
+      clearInterval(moveTimer);
+      send("drag");
+    }
+
+    if (channel === "mochi-drag-move" && dragging) {
+      const [screenX, screenY] = args;
+      const a = getWorkArea();
+      const x = Math.max(a.x, Math.min(screenX - PET_SIZE / 2, a.x + a.width - PET_SIZE));
+      const y = Math.max(a.y, Math.min(screenY - PET_SIZE / 2, a.y + a.height - PET_SIZE));
+      petWindow.setPosition(Math.round(x), Math.round(y), false);
+    }
+
+    if (channel === "mochi-drag-end") {
+      dragging = false;
+      send("idle");
+    }
   });
 
   petWindow.webContents.on("context-menu", () => {
