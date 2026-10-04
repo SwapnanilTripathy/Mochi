@@ -6,30 +6,27 @@ let moveTimer;
 let target = null;
 let direction = 1;
 
-const PET_SIZE = 82;
-const SPEED = 1.2;
-const TICK_MS = 30;
+const PET_SIZE = 86;
+const SPEED = 0.85;
+const TICK_MS = 35;
 
-function getBounds() {
-  const display = screen.getDisplayNearestPoint(
+function getWorkArea() {
+  return screen.getDisplayNearestPoint(
     petWindow ? petWindow.getPosition() : { x: 0, y: 0 }
-  );
-  return display.workArea;
+  ).workArea;
 }
 
 function chooseTarget() {
-  const area = getBounds();
-  const margin = 12;
-
+  const a = getWorkArea();
+  const margin = 8;
   target = {
-    x: area.x + margin + Math.random() * Math.max(1, area.width - PET_SIZE - margin * 2),
-    y: area.y + margin + Math.random() * Math.max(1, area.height - PET_SIZE - margin * 2)
+    x: a.x + margin + Math.random() * Math.max(1, a.width - PET_SIZE - margin * 2),
+    y: a.y + margin + Math.random() * Math.max(1, a.height - PET_SIZE - margin * 2)
   };
 }
 
 function moveMochi() {
-  if (!petWindow || petWindow.isDestroyed() || petWindow.isMinimized()) return;
-
+  if (!petWindow || petWindow.isDestroyed()) return;
   if (!target) chooseTarget();
 
   const [x, y] = petWindow.getPosition();
@@ -38,43 +35,52 @@ function moveMochi() {
   const distance = Math.hypot(dx, dy);
 
   if (distance < 8) {
-    chooseTarget();
+    target = null;
+    petWindow.webContents.send("mochi-state", "idle");
     return;
   }
 
-  direction = dx >= 0 ? 1 : -1;
-
+  direction = dx < 0 ? -1 : 1;
   const step = Math.min(SPEED, distance);
-  const nextX = Math.round(x + (dx / distance) * step);
-  const nextY = Math.round(y + (dy / distance) * step);
-
-  petWindow.setPosition(nextX, nextY, false);
+  petWindow.setPosition(
+    Math.round(x + (dx / distance) * step),
+    Math.round(y + (dy / distance) * step),
+    false
+  );
   petWindow.webContents.send("mochi-direction", direction);
+  petWindow.webContents.send("mochi-state", "walk");
 }
 
 function startMovement() {
   clearInterval(moveTimer);
+  chooseTarget();
   moveTimer = setInterval(moveMochi, TICK_MS);
 }
 
+function pauseMovement() {
+  clearInterval(moveTimer);
+  moveTimer = null;
+  target = null;
+  petWindow?.webContents.send("mochi-state", "idle");
+}
+
 function createPet() {
-  const display = screen.getPrimaryDisplay();
-  const { workArea } = display;
+  const a = screen.getPrimaryDisplay().workArea;
 
   petWindow = new BrowserWindow({
     width: PET_SIZE,
     height: PET_SIZE,
-    x: workArea.x + workArea.width - PET_SIZE - 24,
-    y: workArea.y + workArea.height - PET_SIZE - 24,
+    x: a.x + a.width - PET_SIZE - 24,
+    y: a.y + a.height - PET_SIZE - 24,
     frame: false,
     transparent: true,
+    backgroundColor: "#00000000",
     resizable: false,
     movable: false,
     alwaysOnTop: true,
     hasShadow: false,
     skipTaskbar: true,
-    backgroundColor: "rgba(0,0,0,0)",
-    paintWhenInitiallyHidden: false,
+    show: true,
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
@@ -85,9 +91,9 @@ function createPet() {
   petWindow.setMenuBarVisibility(false);
   petWindow.loadFile(path.join(__dirname, "index.html"));
 
-  petWindow.webContents.on("did-finish-load", () => {
-    chooseTarget();
-    startMovement();
+  petWindow.webContents.once("did-finish-load", () => {
+    petWindow.webContents.send("mochi-state", "idle");
+    setTimeout(startMovement, 700);
   });
 
   petWindow.on("closed", () => {
@@ -96,36 +102,22 @@ function createPet() {
   });
 
   petWindow.webContents.on("context-menu", () => {
-    const menu = Menu.buildFromTemplate([
-      {
-        label: "Pause movement",
-        click: () => clearInterval(moveTimer)
-      },
-      {
-        label: "Resume movement",
-        click: () => startMovement()
-      },
+    Menu.buildFromTemplate([
+      { label: "Pause", click: pauseMovement },
+      { label: "Resume", click: startMovement },
       { type: "separator" },
       {
         label: "Stay here",
         click: () => {
-          clearInterval(moveTimer);
-          target = null;
+          pauseMovement();
+          petWindow.webContents.send("mochi-state", "idle");
         }
       },
       { type: "separator" },
-      {
-        label: "Exit Mochi",
-        click: () => app.quit()
-      }
-    ]);
-
-    menu.popup();
+      { label: "Exit Mochi", click: () => app.quit() }
+    ]).popup();
   });
 }
 
 app.whenReady().then(createPet);
-
-app.on("window-all-closed", (event) => {
-  event.preventDefault();
-});
+app.on("window-all-closed", e => e.preventDefault());
