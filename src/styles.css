@@ -1,50 +1,10 @@
-html,
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  background: transparent !important;
-}
-
-body {
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-app-region: no-drag;
-}
-
-.pet {
-  position: relative;
-  width: 82px;
-  height: 82px;
-  animation: float 2.6s ease-in-out infinite;
-  cursor: pointer;
-}
-
-.mochi {
-  position: absolute;
-  left: 1px;
-  top: 1px;
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  transform-origin: center bottom;
-  filter: drop-shadow(0 3px 3px rgba(20, 28, 42, 0.16));
-  transition: transform 180ms ease;
-}
-
-.walk-left .mochi { transform: scaleX(-1); }
-.walk-right .mochi { transform: scaleX(1); }
-
-.pet:hover .mochi {
-  transform: translateY(-2px) scale(1.04);
-}
-
-.walk-left:hover .mochi {
-  transform: translateY(-2px) scaleX(-1) scale(1.04);
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
-}
+html,body{width:100%;height:100%;margin:0;background:transparent!important;overflow:hidden}
+body{-webkit-app-region:no-drag;user-select:none}
+.mochi{width:86px;height:86px;display:grid;place-items:center;transform-origin:center bottom}
+#sprite{width:84px;height:84px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 3px 2px rgba(18,25,38,.18))}
+.idle{animation:breathe 2.8s ease-in-out infinite}
+.walk{animation:walkBob .42s ease-in-out infinite}
+.look{animation:look 1.4s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+@keyframes walkBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes look{0%,100%{transform:rotate(0)}50%{transform:rotate(-2deg)}}
