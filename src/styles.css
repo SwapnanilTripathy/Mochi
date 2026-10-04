@@ -29,3 +29,5 @@ body{-webkit-app-region:no-drag;user-select:none}
 
 .heart{position:absolute;z-index:5;font-size:15px;line-height:1;pointer-events:none;animation:heartFloat .9s ease-out forwards;filter:drop-shadow(0 1px 1px rgba(18,25,38,.22))}
 @keyframes heartFloat{0%{opacity:0;transform:translate(0,6px) scale(.55)}18%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(7px,-22px) scale(.8)}}
+
+#rig{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;transform-origin:center bottom}.rig-layer{position:absolute;display:block;max-width:none;max-height:none;pointer-events:none;transform-origin:center center;will-change:transform,opacity}.rig-pat{animation:rigPat .52s cubic-bezier(.2,.9,.25,1.35)}@keyframes rigPat{0%{transform:scaleX(1) translateY(0) scale(1)}38%{transform:scaleX(1) translateY(-4px) scale(1.045)}100%{transform:scaleX(1) translateY(0) scale(1)}}.rig-fallback{display:none!important}
