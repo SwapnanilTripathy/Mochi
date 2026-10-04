@@ -23,3 +23,6 @@ body{-webkit-app-region:no-drag;user-select:none}
 
 .curious{animation:curiousLook 1.1s ease-in-out infinite}
 @keyframes curiousLook{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(-2px) rotate(-3deg) scale(1.035)}}
+
+.curious #sprite{animation:curiousSprite 1.15s ease-in-out infinite}
+@keyframes curiousSprite{0%,100%{filter:drop-shadow(0 3px 2px rgba(18,25,38,.18))}50%{filter:drop-shadow(0 5px 4px rgba(18,25,38,.26))}}
