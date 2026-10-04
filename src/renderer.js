@@ -9,7 +9,7 @@ const frames = {
 let state = "idle";
 let direction = 1;
 let frame = 0;
-let timer;
+let timer = null;
 
 function render() {
   const list = frames[state] || frames.idle;
@@ -19,9 +19,24 @@ function render() {
 }
 
 function setState(next) {
-  state = next === "walk" ? "walk" : "idle";
+  state = ["idle", "walk", "sleep", "stretch"].includes(next) ? next : "idle";
   frame = 0;
   render();
+  restartAnimation();
+}
+
+function restartAnimation() {
+  clearInterval(timer);
+  const speed = state === "walk" ? 110 : state === "idle" ? 240 : 320;
+  timer = setInterval(() => {
+    if (state === "sleep") {
+      frame = (frame + 1) % 2;
+      sprite.src = frames.idle[frame];
+      return;
+    }
+    frame = (frame + 1) % frames.idle.length;
+    render();
+  }, speed);
 }
 
 window.mochi.onState(setState);
@@ -35,17 +50,23 @@ sprite.onerror = () => {
   sprite.src = "./assets/mochi.svg";
 };
 
-render();
-
-clearInterval(timer);
-timer = setInterval(() => {
-  frame = (frame + 1) % (frames[state] || frames.idle).length;
-  render();
-}, state === "walk" ? 110 : 240);
-
 pet.addEventListener("mouseenter", () => {
   if (state === "idle") pet.className = "mochi look";
 });
+
 pet.addEventListener("mouseleave", () => {
   pet.className = `mochi ${state}`;
 });
+
+pet.addEventListener("click", () => {
+  pet.classList.remove("pat");
+  void pet.offsetWidth;
+  pet.classList.add("pat");
+});
+
+pet.addEventListener("dblclick", () => {
+  window.mochi.nap();
+});
+
+render();
+restartAnimation();
