@@ -19,6 +19,7 @@ A tiny animated desktop companion for Windows.
 - Dragging pauses wandering until released
 - Occasionally chooses a screen edge and sits there for a few seconds
 - Notices the cursor when it comes close and becomes curious
+- Slowly approaches a nearby cursor and stops at a comfortable distance
 
 ## Controls
 
