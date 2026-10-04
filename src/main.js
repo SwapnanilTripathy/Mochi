@@ -65,7 +65,6 @@ function moveMochi() {
     if (!curious) {
       curious = true;
       target = null;
-      clearInterval(moveTimer);
       send("curious");
     }
     direction = mx < cx ? -1 : 1;
