@@ -17,6 +17,8 @@ A tiny animated desktop companion for Windows.
 - Right-click menu: pause, resume, nap, stay, exit
 - Drag Mochi anywhere with the left mouse button
 - Dragging pauses wandering until released
+- Remembers Mochi's last position between launches
+- Right-click menu includes a position reset
 - Occasionally chooses a screen edge and sits there for a few seconds
 - Notices the cursor when it comes close and becomes curious
 - Slowly approaches a nearby cursor and stops at a comfortable distance
