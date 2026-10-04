@@ -12,5 +12,14 @@ contextBridge.exposeInMainWorld("mochi", {
   },
   nap() {
     ipcRenderer.send("mochi-nap");
+  },
+  dragStart() {
+    ipcRenderer.send("mochi-drag-start");
+  },
+  dragMove(x, y) {
+    ipcRenderer.send("mochi-drag-move", x, y);
+  },
+  dragEnd() {
+    ipcRenderer.send("mochi-drag-end");
   }
 });
