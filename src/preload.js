@@ -6,5 +6,11 @@ contextBridge.exposeInMainWorld("mochi", {
   },
   onDirection(callback) {
     ipcRenderer.on("mochi-direction", (_event, direction) => callback(direction));
+  },
+  pause() {
+    ipcRenderer.send("mochi-pause");
+  },
+  nap() {
+    ipcRenderer.send("mochi-nap");
   }
 });
