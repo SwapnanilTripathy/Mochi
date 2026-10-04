@@ -15,6 +15,8 @@ A tiny animated desktop companion for Windows.
 - Click/pat reaction
 - Double-click to nap
 - Right-click menu: pause, resume, nap, stay, exit
+- Drag Mochi anywhere with the left mouse button
+- Dragging pauses wandering until released
 
 ## Controls
 
