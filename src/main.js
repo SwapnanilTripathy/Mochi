@@ -53,7 +53,9 @@ function chooseTarget() {
 function moveMochi() {
   if (!petWindow || petWindow.isDestroyed() || paused || sleeping || edgeSitting) return;
 
-  const [mx, my] = screen.getCursorScreenPoint();
+  const cursor = screen.getCursorScreenPoint();
+  const mx = cursor.x;
+  const my = cursor.y;
   const [px, py] = petWindow.getPosition();
   const cx = px + PET_SIZE / 2;
   const cy = py + PET_SIZE / 2;
@@ -75,6 +77,8 @@ function moveMochi() {
     curious = false;
     send("idle");
     chooseTarget();
+    clearInterval(moveTimer);
+    moveTimer = setInterval(moveMochi, TICK_MS);
   }
   if (!target) chooseTarget();
 
