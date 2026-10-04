@@ -2,31 +2,43 @@
 
 A tiny animated desktop companion for Windows.
 
-## v0.2 — Alive
+## Current build
 
-Mochi now has an animation-ready desktop engine:
+- Transparent always-on-top desktop pet
+- Approved 4-frame idle artwork
+- Approved 4-frame walk artwork
+- Smooth wandering with variable speed
+- Direction-aware sprite flipping
+- Natural idle/walk transitions
+- Random stretch and nap behavior
+- Hover reaction
+- Click/pat reaction
+- Double-click to nap
+- Right-click menu: pause, resume, nap, stay, exit
 
-- transparent always-on-top window
-- 8-frame idle animation
-- 8-frame walk animation
-- directional flipping
-- smooth movement
-- hover/look reaction
-- pause/resume/stay/exit context menu
+## Controls
 
-### Asset layout
+- **Move:** Mochi wanders automatically
+- **Hover:** Mochi reacts
+- **Click:** pat reaction
+- **Double-click:** nap
+- **Right-click:** behavior menu
+
+## Assets
 
 ```
 src/assets/
 ├── idle/
-│   ├── idle-1.png ... idle-8.png
-│   └── approved Mochi idle artwork
+│   ├── idle-1.png
+│   ├── idle-2.png
+│   ├── idle-3.png
+│   └── idle-4.png
 └── walk/
-    ├── walk-1.png ... walk-8.png
-    └── approved Mochi walk artwork
+    ├── walk-1.png
+    ├── walk-2.png
+    ├── walk-3.png
+    └── walk-4.png
 ```
-
-The renderer automatically falls back to the legacy SVG if sprite assets are absent.
 
 ## Run
 
@@ -35,18 +47,6 @@ npm install
 npm start
 ```
 
-## Roadmap
+## Next
 
-- [x] Transparent desktop pet
-- [x] Idle animation engine
-- [x] Walk animation engine
-- [x] Direction-aware movement
-- [ ] Sleep
-- [ ] Stretch
-- [ ] Jump / climb
-- [ ] Cursor interaction
-- [ ] Drag / carry
-- [ ] Taskbar / edge sit
-- [ ] System tray
-- [ ] Settings
-- [ ] Windows installer
+More approved artwork can be dropped into the same state system without changing Mochi's core behavior.
