@@ -26,3 +26,6 @@ body{-webkit-app-region:no-drag;user-select:none}
 
 .curious #sprite{animation:curiousSprite 1.15s ease-in-out infinite}
 @keyframes curiousSprite{0%,100%{filter:drop-shadow(0 3px 2px rgba(18,25,38,.18))}50%{filter:drop-shadow(0 5px 4px rgba(18,25,38,.26))}}
+
+.heart{position:absolute;z-index:5;font-size:15px;line-height:1;pointer-events:none;animation:heartFloat .9s ease-out forwards;filter:drop-shadow(0 1px 1px rgba(18,25,38,.22))}
+@keyframes heartFloat{0%{opacity:0;transform:translate(0,6px) scale(.55)}18%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(7px,-22px) scale(.8)}}
