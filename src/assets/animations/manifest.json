@@ -1,0 +1,2310 @@
+{
+ "_meta": {
+  "canvas": [
+   256,
+   256
+  ],
+  "anchor_px": [
+   128,
+   240
+  ],
+  "note": "Frames are the 30 drawings from the supplied sprite sheet, warped (bob/squash/sway/nod) on one fixed 256x256 transparent canvas. Walk drawings face RIGHT: mirror when moving left."
+ },
+ "animations": {
+  "idle_a_breathe": {
+   "category": "idle",
+   "folder": "idle",
+   "description": "Idle drawing A: breathing loop",
+   "frames": [
+    "idle_a_breathe_001.png",
+    "idle_a_breathe_002.png",
+    "idle_a_breathe_003.png",
+    "idle_a_breathe_004.png",
+    "idle_a_breathe_005.png",
+    "idle_a_breathe_006.png",
+    "idle_a_breathe_007.png",
+    "idle_a_breathe_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 1.0,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.9,
+    "calm": 1.2,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_a"
+   ]
+  },
+  "idle_b_breathe": {
+   "category": "idle",
+   "folder": "idle",
+   "description": "Idle drawing B: breathing loop",
+   "frames": [
+    "idle_b_breathe_001.png",
+    "idle_b_breathe_002.png",
+    "idle_b_breathe_003.png",
+    "idle_b_breathe_004.png",
+    "idle_b_breathe_005.png",
+    "idle_b_breathe_006.png",
+    "idle_b_breathe_007.png",
+    "idle_b_breathe_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 1.0,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.9,
+    "calm": 1.2,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_b"
+   ]
+  },
+  "idle_c_breathe": {
+   "category": "idle",
+   "folder": "idle",
+   "description": "Idle drawing C: breathing loop",
+   "frames": [
+    "idle_c_breathe_001.png",
+    "idle_c_breathe_002.png",
+    "idle_c_breathe_003.png",
+    "idle_c_breathe_004.png",
+    "idle_c_breathe_005.png",
+    "idle_c_breathe_006.png",
+    "idle_c_breathe_007.png",
+    "idle_c_breathe_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 1.0,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.9,
+    "calm": 1.2,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_c"
+   ]
+  },
+  "idle_d_breathe": {
+   "category": "idle",
+   "folder": "idle",
+   "description": "Idle drawing D: breathing loop",
+   "frames": [
+    "idle_d_breathe_001.png",
+    "idle_d_breathe_002.png",
+    "idle_d_breathe_003.png",
+    "idle_d_breathe_004.png",
+    "idle_d_breathe_005.png",
+    "idle_d_breathe_006.png",
+    "idle_d_breathe_007.png",
+    "idle_d_breathe_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 1.0,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.9,
+    "calm": 1.2,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_d"
+   ]
+  },
+  "idle_sway_a": {
+   "category": "idle",
+   "folder": "idle",
+   "description": "Slow weight sway (idle A)",
+   "frames": [
+    "idle_sway_a_001.png",
+    "idle_sway_a_002.png",
+    "idle_sway_a_003.png",
+    "idle_sway_a_004.png",
+    "idle_sway_a_005.png",
+    "idle_sway_a_006.png",
+    "idle_sway_a_007.png",
+    "idle_sway_a_008.png",
+    "idle_sway_a_009.png",
+    "idle_sway_a_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 6,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_a"
+   ]
+  },
+  "idle_sway_d": {
+   "category": "idle",
+   "folder": "idle",
+   "description": "Slow weight sway (idle D)",
+   "frames": [
+    "idle_sway_d_001.png",
+    "idle_sway_d_002.png",
+    "idle_sway_d_003.png",
+    "idle_sway_d_004.png",
+    "idle_sway_d_005.png",
+    "idle_sway_d_006.png",
+    "idle_sway_d_007.png",
+    "idle_sway_d_008.png",
+    "idle_sway_d_009.png",
+    "idle_sway_d_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 6,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_d"
+   ]
+  },
+  "idle_wag_c": {
+   "category": "idle",
+   "folder": "idle",
+   "description": "Excited tail-side wiggle (idle C)",
+   "frames": [
+    "idle_wag_c_001.png",
+    "idle_wag_c_002.png",
+    "idle_wag_c_003.png",
+    "idle_wag_c_004.png",
+    "idle_wag_c_005.png",
+    "idle_wag_c_006.png",
+    "idle_wag_c_007.png",
+    "idle_wag_c_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 10,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.35,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.5,
+    "calm": 0.6,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_c"
+   ]
+  },
+  "walk_normal": {
+   "category": "walk",
+   "folder": "walk",
+   "description": "Normal walk: 4 real walk drawings x 4 bob frames",
+   "frames": [
+    "walk_normal_001.png",
+    "walk_normal_002.png",
+    "walk_normal_003.png",
+    "walk_normal_004.png",
+    "walk_normal_005.png",
+    "walk_normal_006.png",
+    "walk_normal_007.png",
+    "walk_normal_008.png",
+    "walk_normal_009.png",
+    "walk_normal_010.png",
+    "walk_normal_011.png",
+    "walk_normal_012.png",
+    "walk_normal_013.png",
+    "walk_normal_014.png",
+    "walk_normal_015.png",
+    "walk_normal_016.png"
+   ],
+   "frame_count": 16,
+   "fps": 12,
+   "loop": true,
+   "direction": "horizontal",
+   "facing": "right",
+   "priority": 5,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "start_walk"
+   ],
+   "transition_to": [
+    "stop_walk"
+   ],
+   "personality": {
+    "playful": 1.2,
+    "calm": 0.7,
+    "curious": 1
+   },
+   "source_drawings": [
+    "walk_a",
+    "walk_b",
+    "walk_c",
+    "walk_d"
+   ]
+  },
+  "walk_fast": {
+   "category": "walk",
+   "folder": "walk_fast",
+   "description": "Fast walk: stronger bob and lean",
+   "frames": [
+    "walk_fast_001.png",
+    "walk_fast_002.png",
+    "walk_fast_003.png",
+    "walk_fast_004.png",
+    "walk_fast_005.png",
+    "walk_fast_006.png",
+    "walk_fast_007.png",
+    "walk_fast_008.png",
+    "walk_fast_009.png",
+    "walk_fast_010.png",
+    "walk_fast_011.png",
+    "walk_fast_012.png"
+   ],
+   "frame_count": 12,
+   "fps": 16,
+   "loop": true,
+   "direction": "horizontal",
+   "facing": "right",
+   "priority": 5,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.5,
+    "calm": 0.4,
+    "curious": 0.9
+   },
+   "source_drawings": [
+    "walk_a",
+    "walk_b",
+    "walk_c",
+    "walk_d"
+   ]
+  },
+  "walk_slow": {
+   "category": "walk",
+   "folder": "walk_slow",
+   "description": "Slow tired walk",
+   "frames": [
+    "walk_slow_001.png",
+    "walk_slow_002.png",
+    "walk_slow_003.png",
+    "walk_slow_004.png",
+    "walk_slow_005.png",
+    "walk_slow_006.png",
+    "walk_slow_007.png",
+    "walk_slow_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": true,
+   "direction": "horizontal",
+   "facing": "right",
+   "priority": 4,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.5,
+    "calm": 1.6,
+    "curious": 0.8
+   },
+   "source_drawings": [
+    "walk_a",
+    "walk_b",
+    "walk_c",
+    "walk_d"
+   ]
+  },
+  "walk_excited": {
+   "category": "walk",
+   "folder": "walk_excited",
+   "description": "Excited bouncy walk",
+   "frames": [
+    "walk_excited_001.png",
+    "walk_excited_002.png",
+    "walk_excited_003.png",
+    "walk_excited_004.png",
+    "walk_excited_005.png",
+    "walk_excited_006.png",
+    "walk_excited_007.png",
+    "walk_excited_008.png",
+    "walk_excited_009.png",
+    "walk_excited_010.png",
+    "walk_excited_011.png",
+    "walk_excited_012.png"
+   ],
+   "frame_count": 12,
+   "fps": 14,
+   "loop": true,
+   "direction": "horizontal",
+   "facing": "right",
+   "priority": 5,
+   "recommended_probability": 0.4,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.8,
+    "calm": 0.3,
+    "curious": 1
+   },
+   "source_drawings": [
+    "walk_a",
+    "walk_b",
+    "walk_c",
+    "walk_d"
+   ]
+  },
+  "start_walk": {
+   "category": "start_walk",
+   "folder": "start_walk",
+   "description": "Idle -> crouch/lean -> first steps",
+   "frames": [
+    "start_walk_001.png",
+    "start_walk_002.png",
+    "start_walk_003.png",
+    "start_walk_004.png",
+    "start_walk_005.png",
+    "start_walk_006.png",
+    "start_walk_007.png"
+   ],
+   "frame_count": 7,
+   "fps": 10,
+   "loop": false,
+   "direction": "horizontal",
+   "facing": "right",
+   "priority": 3,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "walk_normal"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_d",
+    "walk_a",
+    "walk_b",
+    "walk_c",
+    "walk_d"
+   ]
+  },
+  "stop_walk": {
+   "category": "stop_walk",
+   "folder": "stop_walk",
+   "description": "Walk -> slow -> settle -> idle",
+   "frames": [
+    "stop_walk_001.png",
+    "stop_walk_002.png",
+    "stop_walk_003.png",
+    "stop_walk_004.png",
+    "stop_walk_005.png",
+    "stop_walk_006.png",
+    "stop_walk_007.png"
+   ],
+   "frame_count": 7,
+   "fps": 10,
+   "loop": false,
+   "direction": "horizontal",
+   "facing": "right",
+   "priority": 3,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "walk_normal"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_d",
+    "walk_a",
+    "walk_b",
+    "walk_c",
+    "walk_d"
+   ]
+  },
+  "sit_a_breathe": {
+   "category": "sit",
+   "folder": "sit",
+   "description": "Sitting A: slow breathing",
+   "frames": [
+    "sit_a_breathe_001.png",
+    "sit_a_breathe_002.png",
+    "sit_a_breathe_003.png",
+    "sit_a_breathe_004.png",
+    "sit_a_breathe_005.png",
+    "sit_a_breathe_006.png",
+    "sit_a_breathe_007.png",
+    "sit_a_breathe_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 6,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.7,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.7,
+    "calm": 1.6,
+    "curious": 0.9
+   },
+   "source_drawings": [
+    "sit_a"
+   ]
+  },
+  "sit_b_breathe": {
+   "category": "sit",
+   "folder": "sit",
+   "description": "Sitting B: eyes-closed content breathing",
+   "frames": [
+    "sit_b_breathe_001.png",
+    "sit_b_breathe_002.png",
+    "sit_b_breathe_003.png",
+    "sit_b_breathe_004.png",
+    "sit_b_breathe_005.png",
+    "sit_b_breathe_006.png",
+    "sit_b_breathe_007.png",
+    "sit_b_breathe_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 6,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.6,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.7,
+    "calm": 1.6,
+    "curious": 0.9
+   },
+   "source_drawings": [
+    "sit_b"
+   ]
+  },
+  "sit_look_tilt": {
+   "category": "look",
+   "folder": "look",
+   "description": "Sit and look up: head tilt and nod",
+   "frames": [
+    "sit_look_tilt_001.png",
+    "sit_look_tilt_002.png",
+    "sit_look_tilt_003.png",
+    "sit_look_tilt_004.png",
+    "sit_look_tilt_005.png",
+    "sit_look_tilt_006.png",
+    "sit_look_tilt_007.png",
+    "sit_look_tilt_008.png",
+    "sit_look_tilt_009.png",
+    "sit_look_tilt_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 8,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 2,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 0.9,
+    "curious": 1.5
+   },
+   "source_drawings": [
+    "sit_look"
+   ]
+  },
+  "sit_down": {
+   "category": "sit",
+   "folder": "sit",
+   "description": "Idle -> crouch -> sit",
+   "frames": [
+    "sit_down_001.png",
+    "sit_down_002.png",
+    "sit_down_003.png",
+    "sit_down_004.png",
+    "sit_down_005.png",
+    "sit_down_006.png"
+   ],
+   "frame_count": 6,
+   "fps": 10,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "sit_a_breathe"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_a",
+    "sit_a"
+   ]
+  },
+  "stand_up": {
+   "category": "stand",
+   "folder": "stand",
+   "description": "Sit -> lean -> stand",
+   "frames": [
+    "stand_up_001.png",
+    "stand_up_002.png",
+    "stand_up_003.png",
+    "stand_up_004.png",
+    "stand_up_005.png",
+    "stand_up_006.png"
+   ],
+   "frame_count": 6,
+   "fps": 10,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "sit_a_breathe"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_a",
+    "sit_a"
+   ]
+  },
+  "cursor_noticed": {
+   "category": "cursor",
+   "folder": "cursor",
+   "description": "Notices cursor: pop up, ears perk, settle",
+   "frames": [
+    "cursor_noticed_001.png",
+    "cursor_noticed_002.png",
+    "cursor_noticed_003.png",
+    "cursor_noticed_004.png",
+    "cursor_noticed_005.png",
+    "cursor_noticed_006.png"
+   ],
+   "frame_count": 6,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "cursor_nearby"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 0.7,
+    "curious": 1.8
+   },
+   "source_drawings": [
+    "cur_notice"
+   ]
+  },
+  "cursor_nearby": {
+   "category": "cursor",
+   "folder": "cursor",
+   "description": "Watching cursor: attentive wiggle",
+   "frames": [
+    "cursor_nearby_001.png",
+    "cursor_nearby_002.png",
+    "cursor_nearby_003.png",
+    "cursor_nearby_004.png",
+    "cursor_nearby_005.png",
+    "cursor_nearby_006.png",
+    "cursor_nearby_007.png",
+    "cursor_nearby_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 2,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 0.7,
+    "curious": 1.8
+   },
+   "source_drawings": [
+    "cur_notice"
+   ]
+  },
+  "cursor_crouch": {
+   "category": "cursor",
+   "folder": "cursor",
+   "description": "Play-bow crouch wiggle (cursor close)",
+   "frames": [
+    "cursor_crouch_001.png",
+    "cursor_crouch_002.png",
+    "cursor_crouch_003.png",
+    "cursor_crouch_004.png",
+    "cursor_crouch_005.png",
+    "cursor_crouch_006.png",
+    "cursor_crouch_007.png",
+    "cursor_crouch_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 10,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.4,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.4,
+    "calm": 0.6,
+    "curious": 1.6
+   },
+   "source_drawings": [
+    "cur_crouch"
+   ]
+  },
+  "cursor_look": {
+   "category": "cursor",
+   "folder": "cursor",
+   "description": "Looking toward cursor and reaching",
+   "frames": [
+    "cursor_look_001.png",
+    "cursor_look_002.png",
+    "cursor_look_003.png",
+    "cursor_look_004.png",
+    "cursor_look_005.png",
+    "cursor_look_006.png",
+    "cursor_look_007.png",
+    "cursor_look_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "left",
+   "priority": 3,
+   "recommended_probability": 0.4,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 0.7,
+    "curious": 1.7
+   },
+   "source_drawings": [
+    "cur_look"
+   ]
+  },
+  "cursor_approach": {
+   "category": "cursor",
+   "folder": "cursor",
+   "description": "Crouched approach (engine moves x)",
+   "frames": [
+    "cursor_approach_001.png",
+    "cursor_approach_002.png",
+    "cursor_approach_003.png",
+    "cursor_approach_004.png",
+    "cursor_approach_005.png",
+    "cursor_approach_006.png",
+    "cursor_approach_007.png",
+    "cursor_approach_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 12,
+   "loop": true,
+   "direction": "horizontal",
+   "facing": "left",
+   "priority": 3,
+   "recommended_probability": 0.4,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.2,
+    "calm": 0.6,
+    "curious": 1.7
+   },
+   "source_drawings": [
+    "cur_crouch"
+   ]
+  },
+  "happy_a_bounce": {
+   "category": "happy",
+   "folder": "happy",
+   "description": "Happy bounce A (squash-hop-land x2)",
+   "frames": [
+    "happy_a_bounce_001.png",
+    "happy_a_bounce_002.png",
+    "happy_a_bounce_003.png",
+    "happy_a_bounce_004.png",
+    "happy_a_bounce_005.png",
+    "happy_a_bounce_006.png",
+    "happy_a_bounce_007.png",
+    "happy_a_bounce_008.png",
+    "happy_a_bounce_009.png",
+    "happy_a_bounce_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.6,
+    "calm": 0.6,
+    "curious": 1
+   },
+   "source_drawings": [
+    "happy_a"
+   ]
+  },
+  "happy_b_bounce": {
+   "category": "happy",
+   "folder": "happy",
+   "description": "Excited bounce B (wink, ear/tail perk)",
+   "frames": [
+    "happy_b_bounce_001.png",
+    "happy_b_bounce_002.png",
+    "happy_b_bounce_003.png",
+    "happy_b_bounce_004.png",
+    "happy_b_bounce_005.png",
+    "happy_b_bounce_006.png",
+    "happy_b_bounce_007.png",
+    "happy_b_bounce_008.png",
+    "happy_b_bounce_009.png",
+    "happy_b_bounce_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.6,
+    "calm": 0.6,
+    "curious": 1
+   },
+   "source_drawings": [
+    "happy_b"
+   ]
+  },
+  "happy_wiggle": {
+   "category": "happy",
+   "folder": "happy",
+   "description": "Happy wiggle",
+   "frames": [
+    "happy_wiggle_001.png",
+    "happy_wiggle_002.png",
+    "happy_wiggle_003.png",
+    "happy_wiggle_004.png",
+    "happy_wiggle_005.png",
+    "happy_wiggle_006.png",
+    "happy_wiggle_007.png",
+    "happy_wiggle_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 10,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 2,
+   "recommended_probability": 0.4,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.5,
+    "calm": 0.7,
+    "curious": 1
+   },
+   "source_drawings": [
+    "happy_b"
+   ]
+  },
+  "pat": {
+   "category": "pat",
+   "folder": "pat",
+   "description": "Pat: surprise -> press down -> happy bounce -> settle",
+   "frames": [
+    "pat_001.png",
+    "pat_002.png",
+    "pat_003.png",
+    "pat_004.png",
+    "pat_005.png",
+    "pat_006.png",
+    "pat_007.png",
+    "pat_008.png",
+    "pat_009.png",
+    "pat_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.8,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.5,
+    "calm": 1.1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "happy_a"
+   ]
+  },
+  "treat": {
+   "category": "treat",
+   "folder": "treat",
+   "description": "Treat: notice -> excited -> hop -> happy chomp -> settle",
+   "frames": [
+    "treat_001.png",
+    "treat_002.png",
+    "treat_003.png",
+    "treat_004.png",
+    "treat_005.png",
+    "treat_006.png",
+    "treat_007.png",
+    "treat_008.png",
+    "treat_009.png",
+    "treat_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 10,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.5,
+    "calm": 1,
+    "curious": 1.1
+   },
+   "source_drawings": [
+    "cur_notice",
+    "happy_b"
+   ]
+  },
+  "sleep_a_breathe": {
+   "category": "sleep",
+   "folder": "sleep",
+   "description": "Curled sleep A: slow breathing",
+   "frames": [
+    "sleep_a_breathe_001.png",
+    "sleep_a_breathe_002.png",
+    "sleep_a_breathe_003.png",
+    "sleep_a_breathe_004.png",
+    "sleep_a_breathe_005.png",
+    "sleep_a_breathe_006.png",
+    "sleep_a_breathe_007.png",
+    "sleep_a_breathe_008.png",
+    "sleep_a_breathe_009.png",
+    "sleep_a_breathe_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 5,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 1.0,
+   "transition_from": [
+    "fall_asleep"
+   ],
+   "transition_to": [
+    "wake"
+   ],
+   "personality": {
+    "playful": 0.4,
+    "calm": 1.8,
+    "curious": 0.6
+   },
+   "source_drawings": [
+    "sleep_a"
+   ]
+  },
+  "sleep_b_breathe": {
+   "category": "sleep",
+   "folder": "sleep",
+   "description": "Curled sleep B: slow breathing",
+   "frames": [
+    "sleep_b_breathe_001.png",
+    "sleep_b_breathe_002.png",
+    "sleep_b_breathe_003.png",
+    "sleep_b_breathe_004.png",
+    "sleep_b_breathe_005.png",
+    "sleep_b_breathe_006.png",
+    "sleep_b_breathe_007.png",
+    "sleep_b_breathe_008.png",
+    "sleep_b_breathe_009.png",
+    "sleep_b_breathe_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 5,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.8,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.4,
+    "calm": 1.8,
+    "curious": 0.6
+   },
+   "source_drawings": [
+    "sleep_b"
+   ]
+  },
+  "sleep_deep_breath": {
+   "category": "sleep",
+   "folder": "sleep",
+   "description": "One deeper breath",
+   "frames": [
+    "sleep_deep_breath_001.png",
+    "sleep_deep_breath_002.png",
+    "sleep_deep_breath_003.png",
+    "sleep_deep_breath_004.png",
+    "sleep_deep_breath_005.png",
+    "sleep_deep_breath_006.png",
+    "sleep_deep_breath_007.png",
+    "sleep_deep_breath_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 5,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.3,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "sleep_a"
+   ]
+  },
+  "sleep_twitch": {
+   "category": "sleep",
+   "folder": "sleep",
+   "description": "Sleep twitch / shift",
+   "frames": [
+    "sleep_twitch_001.png",
+    "sleep_twitch_002.png",
+    "sleep_twitch_003.png",
+    "sleep_twitch_004.png",
+    "sleep_twitch_005.png",
+    "sleep_twitch_006.png"
+   ],
+   "frame_count": 6,
+   "fps": 10,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.3,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "sleep_b"
+   ]
+  },
+  "fall_asleep": {
+   "category": "fall_asleep",
+   "folder": "fall_asleep",
+   "description": "Tired -> droop -> curl up -> asleep",
+   "frames": [
+    "fall_asleep_001.png",
+    "fall_asleep_002.png",
+    "fall_asleep_003.png",
+    "fall_asleep_004.png",
+    "fall_asleep_005.png",
+    "fall_asleep_006.png",
+    "fall_asleep_007.png",
+    "fall_asleep_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.3,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "sleep_a_breathe"
+   ],
+   "personality": {
+    "playful": 0.5,
+    "calm": 1.6,
+    "curious": 0.7
+   },
+   "source_drawings": [
+    "idle_c",
+    "sit_b",
+    "sleep_a",
+    "sleep_b"
+   ]
+  },
+  "wake": {
+   "category": "wake",
+   "folder": "wake",
+   "description": "Sleep -> stir -> sit up -> shake -> ready",
+   "frames": [
+    "wake_001.png",
+    "wake_002.png",
+    "wake_003.png",
+    "wake_004.png",
+    "wake_005.png",
+    "wake_006.png",
+    "wake_007.png",
+    "wake_008.png",
+    "wake_009.png",
+    "wake_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 10,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "sleep_a_breathe"
+   ],
+   "transition_to": [
+    "stretch"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "sit_a",
+    "sit_b",
+    "sleep_a",
+    "sleep_b"
+   ]
+  },
+  "stretch": {
+   "category": "stretch",
+   "folder": "stretch",
+   "description": "Sleepy -> play-bow stretch -> reach -> recover",
+   "frames": [
+    "stretch_001.png",
+    "stretch_002.png",
+    "stretch_003.png",
+    "stretch_004.png",
+    "stretch_005.png",
+    "stretch_006.png",
+    "stretch_007.png",
+    "stretch_008.png",
+    "stretch_009.png",
+    "stretch_010.png",
+    "stretch_011.png",
+    "stretch_012.png",
+    "stretch_013.png",
+    "stretch_014.png",
+    "stretch_015.png",
+    "stretch_016.png"
+   ],
+   "frame_count": 16,
+   "fps": 10,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.4,
+   "transition_from": [
+    "wake",
+    "idle"
+   ],
+   "transition_to": [
+    "start_walk",
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.9,
+    "calm": 1.3,
+    "curious": 0.8
+   },
+   "source_drawings": [
+    "idle_a",
+    "sit_a",
+    "stretch_a",
+    "stretch_b"
+   ]
+  },
+  "jump": {
+   "category": "jump",
+   "folder": "jump",
+   "description": "Crouch -> leap arc -> land squash (engine moves x)",
+   "frames": [
+    "jump_001.png",
+    "jump_002.png",
+    "jump_003.png",
+    "jump_004.png",
+    "jump_005.png",
+    "jump_006.png",
+    "jump_007.png",
+    "jump_008.png",
+    "jump_009.png"
+   ],
+   "frame_count": 9,
+   "fps": 12,
+   "loop": false,
+   "direction": "horizontal",
+   "facing": "right",
+   "priority": 4,
+   "recommended_probability": 0.2,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.6,
+    "calm": 0.3,
+    "curious": 1
+   },
+   "source_drawings": [
+    "jump"
+   ]
+  },
+  "climb": {
+   "category": "climb",
+   "folder": "climb",
+   "description": "Climb shuffle on screen edge",
+   "frames": [
+    "climb_001.png",
+    "climb_002.png",
+    "climb_003.png",
+    "climb_004.png",
+    "climb_005.png",
+    "climb_006.png",
+    "climb_007.png",
+    "climb_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": true,
+   "direction": "vertical",
+   "facing": "front",
+   "priority": 3,
+   "recommended_probability": 0.2,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.3,
+    "calm": 0.4,
+    "curious": 1
+   },
+   "source_drawings": [
+    "climb"
+   ]
+  },
+  "drag_sway": {
+   "category": "drag",
+   "folder": "drag",
+   "description": "Carried: dangling pendulum sway",
+   "frames": [
+    "drag_sway_001.png",
+    "drag_sway_002.png",
+    "drag_sway_003.png",
+    "drag_sway_004.png",
+    "drag_sway_005.png",
+    "drag_sway_006.png",
+    "drag_sway_007.png",
+    "drag_sway_008.png",
+    "drag_sway_009.png",
+    "drag_sway_010.png",
+    "drag_sway_011.png",
+    "drag_sway_012.png"
+   ],
+   "frame_count": 12,
+   "fps": 12,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 5,
+   "recommended_probability": 0.0,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "drag"
+   ]
+  },
+  "drag_release": {
+   "category": "drag",
+   "folder": "drag",
+   "description": "Dropped: swing out, land squash, relief",
+   "frames": [
+    "drag_release_001.png",
+    "drag_release_002.png",
+    "drag_release_003.png",
+    "drag_release_004.png",
+    "drag_release_005.png",
+    "drag_release_006.png",
+    "drag_release_007.png"
+   ],
+   "frame_count": 7,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 5,
+   "recommended_probability": 0.0,
+   "transition_from": [
+    "drag_sway"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "drag",
+    "idle_a"
+   ]
+  },
+  "misc_question": {
+   "category": "expression",
+   "folder": "expression",
+   "description": "Puzzled (head tilt)",
+   "frames": [
+    "misc_question_001.png",
+    "misc_question_002.png",
+    "misc_question_003.png",
+    "misc_question_004.png",
+    "misc_question_005.png",
+    "misc_question_006.png",
+    "misc_question_007.png",
+    "misc_question_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 10,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 2,
+   "recommended_probability": 0.3,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 0.8,
+    "curious": 1.5
+   },
+   "source_drawings": [
+    "misc_q"
+   ]
+  },
+  "misc_surprise": {
+   "category": "surprise",
+   "folder": "surprise",
+   "description": "Surprise: jump back + settle",
+   "frames": [
+    "misc_surprise_001.png",
+    "misc_surprise_002.png",
+    "misc_surprise_003.png",
+    "misc_surprise_004.png",
+    "misc_surprise_005.png",
+    "misc_surprise_006.png",
+    "misc_surprise_007.png"
+   ],
+   "frame_count": 7,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.2,
+   "transition_from": [
+    "idle",
+    "walk_normal"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.2,
+    "calm": 0.4,
+    "curious": 1.1
+   },
+   "source_drawings": [
+    "misc_ex"
+   ]
+  },
+  "misc_dots": {
+   "category": "expression",
+   "folder": "expression",
+   "description": "Unimpressed / thinking",
+   "frames": [
+    "misc_dots_001.png",
+    "misc_dots_002.png",
+    "misc_dots_003.png",
+    "misc_dots_004.png",
+    "misc_dots_005.png",
+    "misc_dots_006.png",
+    "misc_dots_007.png",
+    "misc_dots_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 2,
+   "recommended_probability": 0.2,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.8,
+    "calm": 1,
+    "curious": 0.9
+   },
+   "source_drawings": [
+    "misc_dots"
+   ]
+  },
+  "misc_angry": {
+   "category": "annoyed",
+   "folder": "annoyed",
+   "description": "Annoyed: puff and tiny shake",
+   "frames": [
+    "misc_angry_001.png",
+    "misc_angry_002.png",
+    "misc_angry_003.png",
+    "misc_angry_004.png",
+    "misc_angry_005.png",
+    "misc_angry_006.png",
+    "misc_angry_007.png",
+    "misc_angry_008.png",
+    "misc_angry_009.png",
+    "misc_angry_010.png"
+   ],
+   "frame_count": 10,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 2,
+   "recommended_probability": 0.15,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.1,
+    "calm": 0.5,
+    "curious": 0.8
+   },
+   "source_drawings": [
+    "misc_angry"
+   ]
+  },
+  "misc_puff": {
+   "category": "sad",
+   "folder": "sad",
+   "description": "Huffy sigh / turn away (puff)",
+   "frames": [
+    "misc_puff_001.png",
+    "misc_puff_002.png",
+    "misc_puff_003.png",
+    "misc_puff_004.png",
+    "misc_puff_005.png",
+    "misc_puff_006.png",
+    "misc_puff_007.png",
+    "misc_puff_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 8,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.15,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.5,
+    "calm": 1.1,
+    "curious": 0.7
+   },
+   "source_drawings": [
+    "misc_puff"
+   ]
+  },
+  "edge_sit_breathe": {
+   "category": "edge",
+   "folder": "edge",
+   "description": "Sitting on taskbar edge: breathing",
+   "frames": [
+    "edge_sit_breathe_001.png",
+    "edge_sit_breathe_002.png",
+    "edge_sit_breathe_003.png",
+    "edge_sit_breathe_004.png",
+    "edge_sit_breathe_005.png",
+    "edge_sit_breathe_006.png",
+    "edge_sit_breathe_007.png",
+    "edge_sit_breathe_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 6,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.6,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.8,
+    "calm": 1.5,
+    "curious": 1
+   },
+   "source_drawings": [
+    "edge_sit"
+   ]
+  },
+  "edge_peek_bob": {
+   "category": "edge",
+   "folder": "edge",
+   "description": "Peeking over edge: head bob",
+   "frames": [
+    "edge_peek_bob_001.png",
+    "edge_peek_bob_002.png",
+    "edge_peek_bob_003.png",
+    "edge_peek_bob_004.png",
+    "edge_peek_bob_005.png",
+    "edge_peek_bob_006.png",
+    "edge_peek_bob_007.png",
+    "edge_peek_bob_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 6,
+   "loop": true,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 1,
+   "recommended_probability": 0.5,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 0.9,
+    "calm": 1.3,
+    "curious": 1.3
+   },
+   "source_drawings": [
+    "edge_peek"
+   ]
+  },
+  "edge_peek_pop": {
+   "category": "edge",
+   "folder": "edge",
+   "description": "Peek pops up and ducks",
+   "frames": [
+    "edge_peek_pop_001.png",
+    "edge_peek_pop_002.png",
+    "edge_peek_pop_003.png",
+    "edge_peek_pop_004.png",
+    "edge_peek_pop_005.png",
+    "edge_peek_pop_006.png",
+    "edge_peek_pop_007.png",
+    "edge_peek_pop_008.png"
+   ],
+   "frame_count": 8,
+   "fps": 10,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 2,
+   "recommended_probability": 0.3,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1.2,
+    "calm": 0.8,
+    "curious": 1.4
+   },
+   "source_drawings": [
+    "edge_peek"
+   ]
+  },
+  "transition_idle_to_walk": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "IDLE -> WALK hop-transition",
+   "frames": [
+    "transition_idle_to_walk_001.png",
+    "transition_idle_to_walk_002.png",
+    "transition_idle_to_walk_003.png",
+    "transition_idle_to_walk_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "walk"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_d",
+    "walk_a"
+   ]
+  },
+  "transition_walk_to_idle": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "WALK -> IDLE hop-transition",
+   "frames": [
+    "transition_walk_to_idle_001.png",
+    "transition_walk_to_idle_002.png",
+    "transition_walk_to_idle_003.png",
+    "transition_walk_to_idle_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "walk"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_d",
+    "walk_d"
+   ]
+  },
+  "transition_idle_to_sit": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "IDLE -> SIT hop-transition",
+   "frames": [
+    "transition_idle_to_sit_001.png",
+    "transition_idle_to_sit_002.png",
+    "transition_idle_to_sit_003.png",
+    "transition_idle_to_sit_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "sit"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_a",
+    "sit_a"
+   ]
+  },
+  "transition_sit_to_stand": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "SIT -> STAND hop-transition",
+   "frames": [
+    "transition_sit_to_stand_001.png",
+    "transition_sit_to_stand_002.png",
+    "transition_sit_to_stand_003.png",
+    "transition_sit_to_stand_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "sit"
+   ],
+   "transition_to": [
+    "stand"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_a",
+    "sit_a"
+   ]
+  },
+  "transition_idle_to_sleep": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "IDLE -> SLEEP hop-transition",
+   "frames": [
+    "transition_idle_to_sleep_001.png",
+    "transition_idle_to_sleep_002.png",
+    "transition_idle_to_sleep_003.png",
+    "transition_idle_to_sleep_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "sleep"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_c",
+    "sleep_b"
+   ]
+  },
+  "transition_sleep_to_wake": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "SLEEP -> WAKE hop-transition",
+   "frames": [
+    "transition_sleep_to_wake_001.png",
+    "transition_sleep_to_wake_002.png",
+    "transition_sleep_to_wake_003.png",
+    "transition_sleep_to_wake_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "sleep"
+   ],
+   "transition_to": [
+    "wake"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "sit_b",
+    "sleep_a"
+   ]
+  },
+  "transition_wake_to_stretch": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "WAKE -> STRETCH hop-transition",
+   "frames": [
+    "transition_wake_to_stretch_001.png",
+    "transition_wake_to_stretch_002.png",
+    "transition_wake_to_stretch_003.png",
+    "transition_wake_to_stretch_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "wake"
+   ],
+   "transition_to": [
+    "stretch"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "sit_b",
+    "stretch_a"
+   ]
+  },
+  "transition_stretch_to_walk": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "STRETCH -> WALK hop-transition",
+   "frames": [
+    "transition_stretch_to_walk_001.png",
+    "transition_stretch_to_walk_002.png",
+    "transition_stretch_to_walk_003.png",
+    "transition_stretch_to_walk_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "stretch"
+   ],
+   "transition_to": [
+    "walk"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "stretch_b",
+    "walk_a"
+   ]
+  },
+  "transition_idle_to_curious": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "IDLE -> CURIOUS hop-transition",
+   "frames": [
+    "transition_idle_to_curious_001.png",
+    "transition_idle_to_curious_002.png",
+    "transition_idle_to_curious_003.png",
+    "transition_idle_to_curious_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "idle"
+   ],
+   "transition_to": [
+    "curious"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "cur_notice",
+    "idle_b"
+   ]
+  },
+  "transition_curious_to_walk": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "CURIOUS -> WALK hop-transition",
+   "frames": [
+    "transition_curious_to_walk_001.png",
+    "transition_curious_to_walk_002.png",
+    "transition_curious_to_walk_003.png",
+    "transition_curious_to_walk_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "curious"
+   ],
+   "transition_to": [
+    "walk"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "cur_notice",
+    "walk_a"
+   ]
+  },
+  "transition_curious_to_idle": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "CURIOUS -> IDLE hop-transition",
+   "frames": [
+    "transition_curious_to_idle_001.png",
+    "transition_curious_to_idle_002.png",
+    "transition_curious_to_idle_003.png",
+    "transition_curious_to_idle_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "curious"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "cur_notice",
+    "idle_b"
+   ]
+  },
+  "transition_walk_to_surprise": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "WALK -> SURPRISE hop-transition",
+   "frames": [
+    "transition_walk_to_surprise_001.png",
+    "transition_walk_to_surprise_002.png",
+    "transition_walk_to_surprise_003.png",
+    "transition_walk_to_surprise_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "walk"
+   ],
+   "transition_to": [
+    "surprise"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "misc_ex",
+    "walk_c"
+   ]
+  },
+  "transition_surprise_to_idle": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "SURPRISE -> IDLE hop-transition",
+   "frames": [
+    "transition_surprise_to_idle_001.png",
+    "transition_surprise_to_idle_002.png",
+    "transition_surprise_to_idle_003.png",
+    "transition_surprise_to_idle_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "surprise"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "idle_a",
+    "misc_ex"
+   ]
+  },
+  "transition_pat_to_idle": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "PAT -> IDLE hop-transition",
+   "frames": [
+    "transition_pat_to_idle_001.png",
+    "transition_pat_to_idle_002.png",
+    "transition_pat_to_idle_003.png",
+    "transition_pat_to_idle_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "pat"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "happy_a",
+    "idle_b"
+   ]
+  },
+  "transition_treat_to_idle": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "TREAT -> IDLE hop-transition",
+   "frames": [
+    "transition_treat_to_idle_001.png",
+    "transition_treat_to_idle_002.png",
+    "transition_treat_to_idle_003.png",
+    "transition_treat_to_idle_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "treat"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "happy_b",
+    "idle_a"
+   ]
+  },
+  "transition_drag_to_idle": {
+   "category": "transitions",
+   "folder": "transitions",
+   "description": "DRAG -> IDLE hop-transition",
+   "frames": [
+    "transition_drag_to_idle_001.png",
+    "transition_drag_to_idle_002.png",
+    "transition_drag_to_idle_003.png",
+    "transition_drag_to_idle_004.png"
+   ],
+   "frame_count": 4,
+   "fps": 12,
+   "loop": false,
+   "direction": "in_place",
+   "facing": "front",
+   "priority": 4,
+   "recommended_probability": 0.9,
+   "transition_from": [
+    "drag"
+   ],
+   "transition_to": [
+    "idle"
+   ],
+   "personality": {
+    "playful": 1,
+    "calm": 1,
+    "curious": 1
+   },
+   "source_drawings": [
+    "drag",
+    "idle_a"
+   ]
+  }
+ }
+}
