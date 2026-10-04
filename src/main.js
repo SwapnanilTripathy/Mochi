@@ -1,5 +1,6 @@
 const { app, BrowserWindow, screen, Menu } = require("electron");
 const path = require("path");
+const fs = require("fs");
 
 let petWindow;
 let moveTimer;
@@ -11,11 +12,41 @@ let sleeping = false;
 let dragging = false;
 let edgeSitting = false;
 let curious = false;
+let savedPosition = null;
 
 const PET_SIZE = 86;
 const MIN_SPEED = 0.45;
 const MAX_SPEED = 1.05;
 const TICK_MS = 35;
+const POSITION_FILE = path.join(app.getPath("userData"), "mochi-position.json");
+
+function loadSavedPosition() {
+  try {
+    if (fs.existsSync(POSITION_FILE)) {
+      const value = JSON.parse(fs.readFileSync(POSITION_FILE, "utf8"));
+      if (Number.isFinite(value.x) && Number.isFinite(value.y)) savedPosition = value;
+    }
+  } catch {}
+}
+
+function savePosition() {
+  if (!petWindow || petWindow.isDestroyed()) return;
+  try {
+    const [x, y] = petWindow.getPosition();
+    fs.mkdirSync(path.dirname(POSITION_FILE), { recursive: true });
+    fs.writeFileSync(POSITION_FILE, JSON.stringify({ x, y }));
+  } catch {}
+}
+
+function resetPosition() {
+  const a = screen.getPrimaryDisplay().workArea;
+  petWindow?.setPosition(
+    a.x + a.width - PET_SIZE - 24,
+    a.y + a.height - PET_SIZE - 24,
+    false
+  );
+  savePosition();
+}
 
 function getWorkArea() {
   if (!petWindow || petWindow.isDestroyed()) return screen.getPrimaryDisplay().workArea;
@@ -185,12 +216,15 @@ function startBehaviorLoop() {
 
 function createPet() {
   const a = screen.getPrimaryDisplay().workArea;
+  loadSavedPosition();
+  const startX = savedPosition?.x ?? (a.x + a.width - PET_SIZE - 24);
+  const startY = savedPosition?.y ?? (a.y + a.height - PET_SIZE - 24);
 
   petWindow = new BrowserWindow({
     width: PET_SIZE,
     height: PET_SIZE,
-    x: a.x + a.width - PET_SIZE - 24,
-    y: a.y + a.height - PET_SIZE - 24,
+    x: startX,
+    y: startY,
     frame: false,
     transparent: true,
     backgroundColor: "#00000000",
@@ -216,7 +250,10 @@ function createPet() {
     startBehaviorLoop();
   });
 
+  petWindow.on("moved", savePosition);
+
   petWindow.on("closed", () => {
+    savePosition();
     clearInterval(moveTimer);
     clearTimeout(behaviorTimer);
     petWindow = null;
@@ -235,6 +272,11 @@ function createPet() {
       send("drag");
     }
 
+    if (channel === "mochi-reset-position") {
+      resetPosition();
+      send("idle");
+    }
+
     if (channel === "mochi-drag-move" && dragging) {
       const [screenX, screenY] = args;
       const a = getWorkArea();
@@ -245,6 +287,7 @@ function createPet() {
 
     if (channel === "mochi-drag-end") {
       dragging = false;
+      savePosition();
       send("idle");
     }
   });
@@ -254,6 +297,7 @@ function createPet() {
       { label: paused ? "Resume wandering" : "Pause wandering", click: () => paused ? startMovement() : pauseMovement() },
       { label: "Take a nap", click: nap },
       { label: "Stay here", click: pauseMovement },
+      { label: "Reset position", click: resetPosition },
       { type: "separator" },
       { label: "Exit Mochi", click: () => app.quit() }
     ]).popup();
