@@ -10,6 +10,8 @@ let state = "idle";
 let direction = 1;
 let frame = 0;
 let timer = null;
+let dragging = false;
+let dragOffset = { x: 0, y: 0 };
 
 function render() {
   const list = frames[state] || frames.idle;
@@ -19,7 +21,7 @@ function render() {
 }
 
 function setState(next) {
-  state = ["idle", "walk", "sleep", "stretch"].includes(next) ? next : "idle";
+  state = ["idle", "walk", "sleep", "stretch", "drag"].includes(next) ? next : "idle";
   frame = 0;
   render();
   restartAnimation();
@@ -27,7 +29,7 @@ function setState(next) {
 
 function restartAnimation() {
   clearInterval(timer);
-  const speed = state === "walk" ? 110 : state === "idle" ? 240 : 320;
+  const speed = state === "walk" ? 110 : state === "idle" ? 240 : state === "drag" ? 180 : 320;
   timer = setInterval(() => {
     if (state === "sleep") {
       frame = (frame + 1) % 2;
@@ -59,13 +61,32 @@ pet.addEventListener("mouseleave", () => {
 });
 
 pet.addEventListener("click", () => {
+  if (dragging) return;
   pet.classList.remove("pat");
   void pet.offsetWidth;
   pet.classList.add("pat");
 });
 
 pet.addEventListener("dblclick", () => {
-  window.mochi.nap();
+  if (!dragging) window.mochi.nap();
+});
+
+pet.addEventListener("mousedown", event => {
+  if (event.button !== 0) return;
+  dragging = true;
+  dragOffset = { x: event.clientX, y: event.clientY };
+  window.mochi.dragStart();
+});
+
+window.addEventListener("mousemove", event => {
+  if (!dragging) return;
+  window.mochi.dragMove(event.screenX, event.screenY);
+});
+
+window.addEventListener("mouseup", event => {
+  if (event.button !== 0 || !dragging) return;
+  dragging = false;
+  window.mochi.dragEnd();
 });
 
 render();
