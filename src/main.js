@@ -3,33 +3,39 @@ const path = require("path");
 
 let petWindow;
 let moveTimer;
+let behaviorTimer;
 let target = null;
 let direction = 1;
+let paused = false;
+let sleeping = false;
 
 const PET_SIZE = 86;
-const SPEED = 0.85;
+const MIN_SPEED = 0.45;
+const MAX_SPEED = 1.05;
 const TICK_MS = 35;
 
 function getWorkArea() {
-  if (!petWindow || petWindow.isDestroyed()) {
-    return screen.getPrimaryDisplay().workArea;
-  }
-
+  if (!petWindow || petWindow.isDestroyed()) return screen.getPrimaryDisplay().workArea;
   const [x, y] = petWindow.getPosition();
   return screen.getDisplayNearestPoint({ x, y }).workArea;
 }
 
+function send(state) {
+  petWindow?.webContents.send("mochi-state", state);
+}
+
 function chooseTarget() {
   const a = getWorkArea();
-  const margin = 8;
+  const margin = 12;
   target = {
     x: a.x + margin + Math.random() * Math.max(1, a.width - PET_SIZE - margin * 2),
-    y: a.y + margin + Math.random() * Math.max(1, a.height - PET_SIZE - margin * 2)
+    y: a.y + margin + Math.random() * Math.max(1, a.height - PET_SIZE - margin * 2),
+    speed: MIN_SPEED + Math.random() * (MAX_SPEED - MIN_SPEED)
   };
 }
 
 function moveMochi() {
-  if (!petWindow || petWindow.isDestroyed()) return;
+  if (!petWindow || petWindow.isDestroyed() || paused || sleeping) return;
   if (!target) chooseTarget();
 
   const [x, y] = petWindow.getPosition();
@@ -39,32 +45,68 @@ function moveMochi() {
 
   if (distance < 8) {
     target = null;
-    petWindow.webContents.send("mochi-state", "idle");
+    send("idle");
     return;
   }
 
   direction = dx < 0 ? -1 : 1;
-  const step = Math.min(SPEED, distance);
+  const step = Math.min(target.speed, distance);
   petWindow.setPosition(
     Math.round(x + (dx / distance) * step),
     Math.round(y + (dy / distance) * step),
     false
   );
   petWindow.webContents.send("mochi-direction", direction);
-  petWindow.webContents.send("mochi-state", "walk");
+  send("walk");
 }
 
 function startMovement() {
+  paused = false;
+  sleeping = false;
   clearInterval(moveTimer);
   chooseTarget();
+  send("idle");
   moveTimer = setInterval(moveMochi, TICK_MS);
 }
 
 function pauseMovement() {
-  clearInterval(moveTimer);
-  moveTimer = null;
+  paused = true;
   target = null;
-  petWindow?.webContents.send("mochi-state", "idle");
+  clearInterval(moveTimer);
+  send("idle");
+}
+
+function nap() {
+  paused = false;
+  sleeping = true;
+  target = null;
+  send("sleep");
+  clearTimeout(behaviorTimer);
+  behaviorTimer = setTimeout(() => {
+    sleeping = false;
+    send("idle");
+    startBehaviorLoop();
+  }, 7000);
+}
+
+function startBehaviorLoop() {
+  clearTimeout(behaviorTimer);
+  behaviorTimer = setTimeout(() => {
+    if (!paused && !sleeping) {
+      const roll = Math.random();
+      if (roll < 0.16) {
+        send("stretch");
+        setTimeout(() => {
+          if (!paused && !sleeping) startMovement();
+        }, 1800);
+      } else if (roll < 0.25) {
+        nap();
+      } else {
+        startMovement();
+      }
+    }
+    if (!sleeping) startBehaviorLoop();
+  }, 7000 + Math.random() * 7000);
 }
 
 function createPet() {
@@ -95,27 +137,27 @@ function createPet() {
   petWindow.loadFile(path.join(__dirname, "index.html"));
 
   petWindow.webContents.once("did-finish-load", () => {
-    petWindow.webContents.send("mochi-state", "idle");
+    send("idle");
     setTimeout(startMovement, 700);
+    startBehaviorLoop();
   });
 
   petWindow.on("closed", () => {
     clearInterval(moveTimer);
+    clearTimeout(behaviorTimer);
     petWindow = null;
+  });
+
+  petWindow.webContents.on("ipc-message", (_event, channel) => {
+    if (channel === "mochi-pause") pauseMovement();
+    if (channel === "mochi-nap") nap();
   });
 
   petWindow.webContents.on("context-menu", () => {
     Menu.buildFromTemplate([
-      { label: "Pause", click: pauseMovement },
-      { label: "Resume", click: startMovement },
-      { type: "separator" },
-      {
-        label: "Stay here",
-        click: () => {
-          pauseMovement();
-          petWindow.webContents.send("mochi-state", "idle");
-        }
-      },
+      { label: paused ? "Resume wandering" : "Pause wandering", click: () => paused ? startMovement() : pauseMovement() },
+      { label: "Take a nap", click: nap },
+      { label: "Stay here", click: pauseMovement },
       { type: "separator" },
       { label: "Exit Mochi", click: () => app.quit() }
     ]).popup();
