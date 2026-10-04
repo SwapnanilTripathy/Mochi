@@ -1,4 +1,4 @@
-const pet=document.getElementById("mochi");const sprite=document.getElementById("sprite");const rigRoot=document.getElementById("rig");const rig=new MochiRig(rigRoot);let state="idle";let direction=1;let dragging=false;
+const pet=document.getElementById("mochi");const sprite=document.getElementById("sprite");const rigRoot=document.getElementById("rig");const rig=new MochiRig(rigRoot);let rigReady=true;rigRoot.addEventListener("rig-error",()=>{if(!rigReady)return;rigReady=false;rigRoot.style.display="none";sprite.classList.remove("rig-fallback");sprite.src="./assets/idle/idle-1.png"});let state="idle";let direction=1;let dragging=false;
 function render(){rig.setState(state);rig.setDirection(direction);pet.className=`mochi ${state}`}
 function setState(next){const allowed=["idle","walk","sleep","stretch","drag","edge","curious"];next=allowed.includes(next)?next:"idle";if(state===next)return;state=next;render()}
 window.mochi.onState(setState);window.mochi.onDirection(d=>{direction=d;rig.setDirection(direction)});
