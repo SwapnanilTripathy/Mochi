@@ -19,9 +19,9 @@ let settings = null;
 let stats = null;
 
 const PET_SIZE = 86;
-const MIN_SPEED = 0.45;
-const MAX_SPEED = 1.05;
-const TICK_MS = 35;
+const MIN_SPEED = 1.15;
+const MAX_SPEED = 2.35;
+const TICK_MS = 25;
 const USER_DIR = app.getPath("userData");
 const SETTINGS_FILE = path.join(USER_DIR, "mochi-settings.json");
 const STATS_FILE = path.join(USER_DIR, "mochi-stats.json");
@@ -190,7 +190,7 @@ function moveMochi() {
     if (wasEdge) {
       edgeSitting = true; send("edge"); clearInterval(moveTimer);
       setTimeout(() => {
-        if (!paused && !dragging) { edgeSitting = false; chooseTarget(); moveTimer = setInterval(moveMochi, TICK_MS); }
+        if (!paused && !dragging) { edgeSitting = false; chooseTarget(); moveMochi(); moveTimer = setInterval(moveMochi, TICK_MS); }
       }, 4500 + Math.random() * 4500);
     } else {
       stats.walks++;
@@ -212,7 +212,12 @@ function startMovement() {
   paused = false; sleeping = false; curious = false; edgeSitting = false;
   clearInterval(moveTimer); clearTimeout(behaviorTimer);
   if (!settings.wander) { send("idle"); refreshTray(); sendSettings(); return; }
-  chooseTarget(); send("idle"); moveTimer = setInterval(moveMochi, TICK_MS); startBehaviorLoop();
+  chooseTarget();
+  send("idle");
+  moveMochi();
+  clearInterval(moveTimer);
+  moveTimer = setInterval(moveMochi, TICK_MS);
+  startBehaviorLoop();
   refreshTray(); sendSettings();
 }
 
@@ -290,8 +295,9 @@ function applySettings(next) {
 function createPet() {
   const a = screen.getPrimaryDisplay().workArea;
   const saved = loadSavedPosition();
-  const startX = Number.isFinite(saved.x) ? saved.x : a.x + a.width - PET_SIZE - 24;
-  const startY = Number.isFinite(saved.y) ? saved.y : a.y + a.height - PET_SIZE - 24;
+  const savedValid = Number.isFinite(saved.x) && Number.isFinite(saved.y) && saved.x >= a.x - PET_SIZE && saved.x <= a.x + a.width && saved.y >= a.y - PET_SIZE && saved.y <= a.y + a.height;
+  const startX = savedValid ? saved.x : a.x + a.width - PET_SIZE - 24;
+  const startY = savedValid ? saved.y : a.y + a.height - PET_SIZE - 24;
 
   petWindow = new BrowserWindow({ width: PET_SIZE, height: PET_SIZE, x: startX, y: startY, frame: false, transparent: true, backgroundColor: "#00000000", resizable: false, movable: false, alwaysOnTop: true, hasShadow: false, skipTaskbar: true, show: true, webPreferences: { contextIsolation: true, nodeIntegration: false, preload: path.join(__dirname, "preload.js") } });
   petWindow.setMenuBarVisibility(false);
