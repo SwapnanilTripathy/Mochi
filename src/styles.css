@@ -14,3 +14,6 @@ body{-webkit-app-region:no-drag;user-select:none}
 @keyframes sleep{0%,100%{transform:translateY(2px) scaleY(.92)}50%{transform:translateY(4px) scaleY(.86)}}
 @keyframes stretch{0%,100%{transform:scale(1)}45%{transform:scaleX(1.08) scaleY(.94)}}
 @keyframes pat{0%{transform:translateY(0) scale(1)}40%{transform:translateY(-5px) scale(1.06)}100%{transform:translateY(0) scale(1)}}
+
+.drag{animation:dragFloat .8s ease-in-out infinite}
+@keyframes dragFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
