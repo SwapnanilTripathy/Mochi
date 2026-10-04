@@ -2,60 +2,37 @@
 
 A tiny animated desktop companion for Windows.
 
-## Current build
-
+## Features
 - Transparent always-on-top desktop pet
-- Approved 4-frame idle artwork
-- Approved 4-frame walk artwork
-- Smooth wandering with variable speed
-- Direction-aware sprite flipping
-- Natural idle/walk transitions
-- Random stretch and nap behavior
-- Hover reaction
-- Click/pat reaction
-- Double-click to nap
-- Right-click menu: pause, resume, nap, stay, exit
-- Drag Mochi anywhere with the left mouse button
-- Dragging pauses wandering until released
-- Remembers Mochi's last position between launches
-- Right-click menu includes a position reset
-- System tray icon with quick Mochi controls
-- Mochi can remain running without a taskbar entry
-- Occasionally chooses a screen edge and sits there for a few seconds
-- Notices the cursor when it comes close and becomes curious
-- Slowly approaches a nearby cursor and stops at a comfortable distance
+- Exact layered Mochi artwork with animated rig
+- Idle, walk, curious, sleep, stretch, drag and edge-sit behaviors
+- Direction-aware movement and cursor awareness
+- Click/pat affection system with persistent stats
+- Treat interaction
+- Headphone music-note effects and optional soft sounds
+- Desktop milestone notifications
+- System tray controls
+- Settings window with personality, behavior, sound, notification and startup controls
+- Persistent position, settings, affection and stats
+- Ctrl+Shift+M pause/resume shortcut
+- Automatic fallback to the original idle sprite when rig assets are missing
 
 ## Controls
-
-- **Move:** Mochi wanders automatically
-- **Hover:** Mochi reacts
-- **Click:** pat reaction
-- **Double-click:** nap
-- **Right-click:** behavior menu
+- **Left click:** pat Mochi
+- **Double click:** nap
+- **Left-drag:** carry Mochi
+- **Right click:** quick menu
+- **Tray:** settings, pause/resume, nap, treat, reset position and quit
+- **Ctrl+Shift+M:** pause/resume wandering
 
 ## Assets
 
-```
-src/assets/
-├── idle/
-│   ├── idle-1.png
-│   ├── idle-2.png
-│   ├── idle-3.png
-│   └── idle-4.png
-└── walk/
-    ├── walk-1.png
-    ├── walk-2.png
-    ├── walk-3.png
-    └── walk-4.png
-```
+The approved 4-frame idle/walk artwork remains available under `src/assets/idle/` and `src/assets/walk/`.
+
+The layered rig expects the 16 exact PNG pieces under `src/assets/rig/`. The artwork is not redrawn or regenerated. If the layered files are absent, Mochi automatically falls back to the original idle sprite.
 
 ## Run
-
-```bash
+```powershell
 npm install
 npm start
 ```
-
-## Next
-
-More approved artwork can be dropped into the same state system without changing Mochi's core behavior.
