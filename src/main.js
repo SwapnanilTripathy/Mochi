@@ -11,9 +11,12 @@ const SPEED = 0.85;
 const TICK_MS = 35;
 
 function getWorkArea() {
-  return screen.getDisplayNearestPoint(
-    petWindow ? petWindow.getPosition() : { x: 0, y: 0 }
-  ).workArea;
+  if (!petWindow || petWindow.isDestroyed()) {
+    return screen.getPrimaryDisplay().workArea;
+  }
+
+  const [x, y] = petWindow.getPosition();
+  return screen.getDisplayNearestPoint({ x, y }).workArea;
 }
 
 function chooseTarget() {
