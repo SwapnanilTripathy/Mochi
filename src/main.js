@@ -7,6 +7,7 @@ let settingsWindow;
 let moveTimer;
 let behaviorTimer;
 let saveTimer;
+let dwellTimer;
 let target = null;
 let direction = 1;
 let paused = false;
@@ -14,6 +15,8 @@ let sleeping = false;
 let dragging = false;
 let edgeSitting = false;
 let curious = false;
+let energy = 100;
+let lastEnergyTick = Date.now();
 let tray = null;
 let settings = null;
 let stats = null;
@@ -159,7 +162,35 @@ function chooseTarget() {
   };
 }
 
+function updateEnergy() {
+  const now = Date.now();
+  const elapsed = Math.max(0, now - lastEnergyTick);
+  lastEnergyTick = now;
+  if (!sleeping && !paused && settings.wander) energy = Math.max(0, energy - elapsed / 180000);
+  else if (sleeping) energy = Math.min(100, energy + elapsed / 12000);
+}
+
+function beginDwell() {
+  clearTimeout(dwellTimer);
+  clearInterval(moveTimer);
+  send("idle");
+  const duration = 900 + Math.random() * 2600;
+  dwellTimer = setTimeout(() => {
+    if (!paused && !sleeping && !dragging && settings.wander) {
+      if (Math.random() < 0.28) {
+        send("curious");
+        setTimeout(() => {
+          if (!paused && !sleeping && !dragging) startMovement();
+        }, 700 + Math.random() * 900);
+      } else {
+        startMovement();
+      }
+    }
+  }, duration);
+}
+
 function moveMochi() {
+  updateEnergy();
   if (!petWindow || petWindow.isDestroyed() || paused || sleeping || dragging || edgeSitting || !settings.wander) return;
 
   const cursor = screen.getCursorScreenPoint();
@@ -187,17 +218,25 @@ function moveMochi() {
   if (distance < 8) {
     const wasEdge = !!target.edge;
     target = null;
+    stats.walks++;
+    saveStats();
+
     if (wasEdge) {
-      edgeSitting = true; send("edge"); clearInterval(moveTimer);
+      edgeSitting = true;
+      send("edge");
+      clearInterval(moveTimer);
       setTimeout(() => {
-        if (!paused && !dragging) { edgeSitting = false; chooseTarget(); moveMochi(); moveTimer = setInterval(moveMochi, TICK_MS); }
+        if (!paused && !dragging && !sleeping) {
+          edgeSitting = false;
+          chooseTarget();
+          moveMochi();
+          moveTimer = setInterval(moveMochi, TICK_MS);
+        }
       }, 4500 + Math.random() * 4500);
     } else {
-      stats.walks++;
-      saveStats();
-      send("idle");
-      sendSettings();
+      beginDwell();
     }
+    sendSettings();
     return;
   }
 
@@ -210,8 +249,9 @@ function moveMochi() {
 
 function startMovement() {
   paused = false; sleeping = false; curious = false; edgeSitting = false;
-  clearInterval(moveTimer); clearTimeout(behaviorTimer);
+  clearInterval(moveTimer); clearTimeout(behaviorTimer); clearTimeout(dwellTimer);
   if (!settings.wander) { send("idle"); refreshTray(); sendSettings(); return; }
+  if (energy < 12) { nap(); return; }
   chooseTarget();
   send("idle");
   moveMochi();
@@ -222,12 +262,15 @@ function startMovement() {
 }
 
 function pauseMovement() {
-  paused = true; curious = false; target = null; clearInterval(moveTimer); clearTimeout(behaviorTimer); send("idle"); refreshTray(); sendSettings();
+  paused = true; curious = false; target = null;
+  clearInterval(moveTimer); clearTimeout(behaviorTimer); clearTimeout(dwellTimer);
+  send("idle"); refreshTray(); sendSettings();
 }
 
 function nap() {
-  paused = false; sleeping = true; target = null; clearInterval(moveTimer); clearTimeout(behaviorTimer);
-  stats.naps++; stats.affection = Math.min(100, stats.affection + 1); saveStats();
+  paused = false; sleeping = true; target = null;
+  clearInterval(moveTimer); clearTimeout(behaviorTimer); clearTimeout(dwellTimer);
+  stats.naps++; stats.affection = Math.min(100, stats.affection + 1); energy = Math.min(100, energy + 12); lastEnergyTick = Date.now(); saveStats();
   send("sleep"); sendSettings();
   behaviorTimer = setTimeout(() => { sleeping = false; send("idle"); startMovement(); }, Math.max(3000, Number(settings.napDuration) || 7000));
   if (settings.notifications && stats.naps % 5 === 0) notify("Mochi is well rested 💤", "Mochi took another tiny nap.");
@@ -236,16 +279,29 @@ function nap() {
 function startBehaviorLoop() {
   clearTimeout(behaviorTimer);
   behaviorTimer = setTimeout(() => {
-    if (!paused && !sleeping && settings.wander) {
+    if (!paused && !sleeping && !dragging && settings.wander) {
+      updateEnergy();
       const roll = Math.random();
-      if (roll < 0.14) {
+
+      if (energy < 28 || roll < 0.08) {
+        nap();
+        return;
+      }
+
+      if (roll < 0.20) {
         send("stretch");
-        setTimeout(() => { if (!paused && !sleeping) startMovement(); }, 1800);
-      } else if (roll < 0.23) nap();
-      else startMovement();
+        setTimeout(() => { if (!paused && !sleeping && !dragging) startMovement(); }, 1600 + Math.random() * 900);
+      } else if (roll < 0.34) {
+        send("curious");
+        setTimeout(() => { if (!paused && !sleeping && !dragging) startMovement(); }, 900 + Math.random() * 900);
+      } else if (roll < 0.48) {
+        beginDwell();
+      } else {
+        startMovement();
+      }
     }
     if (!sleeping) startBehaviorLoop();
-  }, 7000 + Math.random() * 7000);
+  }, 6500 + Math.random() * 9000);
 }
 
 function giveTreat() {
@@ -304,7 +360,15 @@ function createPet() {
   petWindow.setAlwaysOnTop(true, "floating");
   createTray();
   petWindow.loadFile(path.join(__dirname, "index.html"));
-  petWindow.webContents.once("did-finish-load", () => { send("idle"); sendSettings(); setTimeout(startMovement, 700); startBehaviorLoop(); });
+  petWindow.webContents.once("did-finish-load", () => {
+    send("idle");
+    sendSettings();
+    setTimeout(() => {
+      energy = 100;
+      lastEnergyTick = Date.now();
+      startMovement();
+    }, 700);
+  });
   petWindow.on("moved", () => { clearTimeout(saveTimer); saveTimer = setTimeout(savePosition, 250); });
   petWindow.on("closed", () => { savePosition(); clearInterval(moveTimer); clearTimeout(behaviorTimer); petWindow = null; });
 
