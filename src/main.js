@@ -9,6 +9,7 @@ let direction = 1;
 let paused = false;
 let sleeping = false;
 let dragging = false;
+let edgeSitting = false;
 
 const PET_SIZE = 86;
 const MIN_SPEED = 0.45;
@@ -28,6 +29,19 @@ function send(state) {
 function chooseTarget() {
   const a = getWorkArea();
   const margin = 12;
+  const edgeRoll = Math.random();
+  if (edgeRoll < 0.18) {
+    const side = Math.floor(Math.random() * 4);
+    edgeSitting = true;
+    target = {
+      x: side === 1 ? a.x + a.width - PET_SIZE : side === 3 ? a.x : a.x + margin + Math.random() * Math.max(1, a.width - PET_SIZE - margin * 2),
+      y: side === 0 ? a.y : side === 2 ? a.y + a.height - PET_SIZE : a.y + margin + Math.random() * Math.max(1, a.height - PET_SIZE - margin * 2),
+      speed: MIN_SPEED + Math.random() * (MAX_SPEED - MIN_SPEED),
+      edge: true
+    };
+    return;
+  }
+  edgeSitting = false;
   target = {
     x: a.x + margin + Math.random() * Math.max(1, a.width - PET_SIZE - margin * 2),
     y: a.y + margin + Math.random() * Math.max(1, a.height - PET_SIZE - margin * 2),
@@ -36,7 +50,7 @@ function chooseTarget() {
 }
 
 function moveMochi() {
-  if (!petWindow || petWindow.isDestroyed() || paused || sleeping) return;
+  if (!petWindow || petWindow.isDestroyed() || paused || sleeping || edgeSitting) return;
   if (!target) chooseTarget();
 
   const [x, y] = petWindow.getPosition();
@@ -45,8 +59,22 @@ function moveMochi() {
   const distance = Math.hypot(dx, dy);
 
   if (distance < 8) {
+    const wasEdge = !!target.edge;
     target = null;
-    send("idle");
+    if (wasEdge) {
+      edgeSitting = true;
+      send("edge");
+      clearInterval(moveTimer);
+      setTimeout(() => {
+        if (!paused && !dragging) {
+          edgeSitting = false;
+          chooseTarget();
+          moveTimer = setInterval(moveMochi, TICK_MS);
+        }
+      }, 4500 + Math.random() * 4500);
+    } else {
+      send("idle");
+    }
     return;
   }
 
