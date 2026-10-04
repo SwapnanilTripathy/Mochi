@@ -19,6 +19,8 @@ A tiny animated desktop companion for Windows.
 - Dragging pauses wandering until released
 - Remembers Mochi's last position between launches
 - Right-click menu includes a position reset
+- System tray icon with quick Mochi controls
+- Mochi can remain running without a taskbar entry
 - Occasionally chooses a screen edge and sits there for a few seconds
 - Notices the cursor when it comes close and becomes curious
 - Slowly approaches a nearby cursor and stops at a comfortable distance
