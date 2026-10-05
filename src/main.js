@@ -16,7 +16,13 @@ let dragging = false;
 let edgeSitting = false;
 let curious = false;
 let energy = 100;
+let hunger = 22;
+let happiness = 82;
+let boredom = 8;
+let lastNeedsTick = Date.now();
 let lastEnergyTick = Date.now();
+let lastAttentionAt = Date.now();
+let interactionLockUntil = 0;
 let tray = null;
 let settings = null;
 let stats = null;
@@ -120,7 +126,19 @@ function showMochi() {
   petWindow?.focus();
 }
 
-function send(state) { petWindow?.webContents.send("mochi-state", state); }
+function send(state) {
+  if (Date.now() < interactionLockUntil && !["pat","treat","sleep","wake","fall_asleep","drag","drag_release"].includes(state)) return;
+  petWindow?.webContents.send("mochi-state", state);
+}
+function sendNeeds() {
+  petWindow?.webContents.send("mochi-needs", {
+    energy: Math.round(energy),
+    hunger: Math.round(hunger),
+    happiness: Math.round(happiness),
+    boredom: Math.round(boredom)
+  });
+}
+function lockInteraction(ms = 900) { interactionLockUntil = Date.now() + ms; }
 function sendSettings() {
   const data = { settings, stats, paused, sleeping };
   settingsWindow?.webContents.send("settings-data", data);
@@ -162,12 +180,30 @@ function chooseTarget() {
   };
 }
 
-function updateEnergy() {
+function updateNeeds() {
   const now = Date.now();
-  const elapsed = Math.max(0, now - lastEnergyTick);
-  lastEnergyTick = now;
-  if (!sleeping && !paused && settings.wander) energy = Math.max(0, energy - elapsed / 180000);
-  else if (sleeping) energy = Math.min(100, energy + elapsed / 12000);
+  const elapsed = Math.max(0, now - lastNeedsTick);
+  lastNeedsTick = now;
+  const minutes = elapsed / 60000;
+
+  if (sleeping) {
+    energy = Math.min(100, energy + minutes * 9);
+    hunger = Math.min(100, hunger + minutes * 0.7);
+    happiness = Math.min(100, happiness + minutes * 0.15);
+    boredom = Math.max(0, boredom - minutes * 2.2);
+  } else if (!paused) {
+    energy = Math.max(0, energy - minutes * (settings.wander ? 0.9 : 0.18));
+    hunger = Math.min(100, hunger + minutes * 0.55);
+    boredom = Math.min(100, boredom + minutes * (settings.wander ? 0.22 : 0.12));
+    happiness = Math.max(0, happiness - minutes * (settings.wander ? 0.10 : 0.07));
+  }
+
+  if (hunger > 72) happiness = Math.max(0, happiness - minutes * 0.12);
+  if (boredom > 78) happiness = Math.max(0, happiness - minutes * 0.14);
+  sendNeeds();
+}
+function updateEnergy() {
+  updateNeeds();
 }
 
 function beginDwell() {
@@ -190,7 +226,7 @@ function beginDwell() {
 }
 
 function moveMochi() {
-  updateEnergy();
+  updateNeeds();
   if (!petWindow || petWindow.isDestroyed() || paused || sleeping || dragging || edgeSitting || !settings.wander) return;
 
   const cursor = screen.getCursorScreenPoint();
@@ -249,9 +285,10 @@ function moveMochi() {
 
 function startMovement() {
   paused = false; sleeping = false; curious = false; edgeSitting = false;
+  updateNeeds();
   clearInterval(moveTimer); clearTimeout(behaviorTimer); clearTimeout(dwellTimer);
   if (!settings.wander) { send("idle"); refreshTray(); sendSettings(); return; }
-  if (energy < 12) { nap(); return; }
+  if (energy < 12 || (hunger > 92 && Math.random() < 0.45)) { nap(); return; }
   chooseTarget();
   send("idle");
   moveMochi();
@@ -270,32 +307,75 @@ function pauseMovement() {
 function nap() {
   paused = false; sleeping = true; target = null;
   clearInterval(moveTimer); clearTimeout(behaviorTimer); clearTimeout(dwellTimer);
-  stats.naps++; stats.affection = Math.min(100, stats.affection + 1); energy = Math.min(100, energy + 12); lastEnergyTick = Date.now(); saveStats();
-  send("sleep"); sendSettings();
-  behaviorTimer = setTimeout(() => { sleeping = false; send("idle"); startMovement(); }, Math.max(3000, Number(settings.napDuration) || 7000));
-  if (settings.notifications && stats.naps % 5 === 0) notify("Mochi is well rested 💤", "Mochi took another tiny nap.");
+  stats.naps++;
+  stats.affection = Math.min(100, stats.affection + 1);
+  energy = Math.min(100, energy + 8);
+  lastNeedsTick = Date.now();
+  saveStats();
+  lockInteraction(900);
+  send("fall_asleep");
+  sendNeeds();
+  sendSettings();
+
+  const sleepStart = Math.max(900, Math.min(2200, 1100));
+  behaviorTimer = setTimeout(() => {
+    if (!sleeping) return;
+    send("sleep");
+    const restTime = Math.max(3000, Number(settings.napDuration) || 7000);
+    setTimeout(() => {
+      if (!sleeping) return;
+      sleeping = false;
+      updateNeeds();
+      send("wake");
+      setTimeout(() => {
+        if (!paused && !dragging) {
+          send("idle");
+          startMovement();
+        }
+      }, 950);
+    }, restTime);
+  }, sleepStart);
+
+  if (settings.notifications && stats.naps % 5 === 0) {
+    notify("Mochi is sleepy 💤", "Your little companion is taking a nap.");
+  }
 }
 
 function startBehaviorLoop() {
   clearTimeout(behaviorTimer);
   behaviorTimer = setTimeout(() => {
     if (!paused && !sleeping && !dragging && settings.wander) {
-      updateEnergy();
+      updateNeeds();
       const roll = Math.random();
 
-      if (energy < 28 || roll < 0.08) {
+      if (energy < 22) {
         nap();
         return;
       }
 
-      if (roll < 0.20) {
+      if (hunger > 86) {
+        send("annoyed");
+        setTimeout(() => { if (!sleeping && !dragging) send("curious"); }, 900);
+      } else if (boredom > 78 && settings.personality !== "calm") {
+        lockInteraction(1400);
+        send(Math.random() < 0.5 ? "jump" : "happy");
+        happiness = Math.min(100, happiness + 4);
+        boredom = Math.max(0, boredom - 18);
+        setTimeout(() => { if (!paused && !sleeping && !dragging) startMovement(); }, 1200);
+      } else if (roll < 0.18) {
+        lockInteraction(1500);
         send("stretch");
-        setTimeout(() => { if (!paused && !sleeping && !dragging) startMovement(); }, 1600 + Math.random() * 900);
-      } else if (roll < 0.34) {
+        setTimeout(() => { if (!paused && !sleeping && !dragging) startMovement(); }, 1500);
+      } else if (roll < 0.31) {
+        lockInteraction(1200);
         send("curious");
-        setTimeout(() => { if (!paused && !sleeping && !dragging) startMovement(); }, 900 + Math.random() * 900);
-      } else if (roll < 0.48) {
+        setTimeout(() => { if (!paused && !sleeping && !dragging) startMovement(); }, 1000);
+      } else if (roll < 0.43) {
         beginDwell();
+      } else if (roll < 0.53 && settings.personality === "playful") {
+        lockInteraction(1200);
+        send("happy");
+        setTimeout(() => { if (!paused && !sleeping && !dragging) startMovement(); }, 1000);
       } else {
         startMovement();
       }
@@ -305,17 +385,33 @@ function startBehaviorLoop() {
 }
 
 function giveTreat() {
-  stats.treats++; stats.affection = Math.min(100, stats.affection + 4); saveStats();
+  stats.treats++;
+  stats.affection = Math.min(100, stats.affection + 4);
+  hunger = Math.max(0, hunger - 28);
+  happiness = Math.min(100, happiness + 7);
+  boredom = Math.max(0, boredom - 10);
+  energy = Math.min(100, energy + 2);
+  saveStats();
+  lockInteraction(1300);
   petWindow?.webContents.send("mochi-treat");
-  send("curious");
-  setTimeout(() => { if (!sleeping && !paused) send("idle"); }, 1300);
-  notify("Mochi got a treat! 🐺", "Affection increased.");
+  send("treat");
+  sendNeeds();
+  notify("Mochi got a treat! 🐺", "Mochi is happier and less hungry.");
   sendSettings();
 }
 
 function pat() {
-  stats.pats++; stats.affection = Math.min(100, stats.affection + 2); stats.playSessions++; saveStats();
-  send("idle"); petWindow?.webContents.send("mochi-pat", { affection: stats.affection });
+  stats.pats++;
+  stats.affection = Math.min(100, stats.affection + 2);
+  stats.playSessions++;
+  happiness = Math.min(100, happiness + 5);
+  boredom = Math.max(0, boredom - 9);
+  lastAttentionAt = Date.now();
+  saveStats();
+  lockInteraction(950);
+  send("pat");
+  petWindow?.webContents.send("mochi-pat", { affection: stats.affection });
+  sendNeeds();
   if (stats.pats % 10 === 0 && settings.notifications) notify("Mochi likes you 💛", `You have patted Mochi ${stats.pats} times.`);
   sendSettings();
 }
@@ -410,6 +506,11 @@ function createPet() {
 
 app.whenReady().then(() => {
   loadData();
+  lastNeedsTick = Date.now();
+  setInterval(() => {
+    if (!petWindow || petWindow.isDestroyed()) return;
+    updateNeeds();
+  }, 30000);
   app.setLoginItemSettings({ openAtLogin: !!settings.startWithWindows });
   globalShortcut.register("CommandOrControl+Shift+M", () => paused ? startMovement() : pauseMovement());
   createPet();
