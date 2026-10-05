@@ -1,7 +1,7 @@
 html,body{width:100%;height:100%;margin:0;background:transparent!important;overflow:hidden}
 body{-webkit-app-region:no-drag;user-select:none;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-.mochi{position:relative;width:110px;height:110px;display:grid;place-items:center;transform-origin:center bottom}
-#sprite{width:108px;height:108px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 3px 2px rgba(18,25,38,.18));image-rendering:auto}
+.mochi{position:relative;width:125px;height:125px;display:grid;place-items:center;transform-origin:center bottom}
+#sprite{width:123px;height:123px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 3px 2px rgba(18,25,38,.18));image-rendering:auto}
 #rig{display:none!important}
 .heart,.note{position:absolute;z-index:5;line-height:1;pointer-events:none;animation:floatUp .9s ease-out forwards;filter:drop-shadow(0 1px 1px rgba(18,25,38,.22))}
 .heart{font-size:15px}.note{font-size:13px;animation-duration:1.1s}
