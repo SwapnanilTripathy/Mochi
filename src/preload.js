@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld("mochi", {
   onDirection(callback) { ipcRenderer.on("mochi-direction", (_event, direction) => callback(direction)); },
   onPat(callback) { ipcRenderer.on("mochi-pat", (_event, data) => callback(data)); },
   onTreat(callback) { ipcRenderer.on("mochi-treat", () => callback()); },
+  onNeeds(callback) { ipcRenderer.on("mochi-needs", (_event, data) => callback(data)); },
   onSettings(callback) {
     ipcRenderer.on("settings-data", (_event, data) => callback(data));
     ipcRenderer.on("mochi-settings-data", (_event, data) => callback(data));
