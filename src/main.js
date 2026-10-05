@@ -21,7 +21,7 @@ let tray = null;
 let settings = null;
 let stats = null;
 
-const PET_SIZE = 86;
+const PET_SIZE = 110;
 const MIN_SPEED = 1.15;
 const MAX_SPEED = 2.35;
 const TICK_MS = 25;
