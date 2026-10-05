@@ -143,7 +143,7 @@ function sendNeeds() {
 }
 function lockInteraction(ms = 900) { interactionLockUntil = Date.now() + ms; }
 function sendSettings() {
-  const data = { settings, stats, paused, sleeping };
+  const data = { settings, stats, paused, sleeping, needs: { energy, hunger, happiness, boredom } };
   settingsWindow?.webContents.send("settings-data", data);
   petWindow?.webContents.send("mochi-settings-data", data);
 }
