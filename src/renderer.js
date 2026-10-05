@@ -104,7 +104,11 @@ function resolveAnimation(nextState) {
     return manifest.animations.walk_normal;
   }
 
-  if (nextState === "idle") return chooseAnimation("idle");
+  if (nextState === "idle") {
+    const idles = animationEntries("idle");
+    const candidates = idles.filter(([, a]) => a !== currentAnimation);
+    return chooseAnimation("idle", candidates.slice(0, 2).map(([key]) => key)) || chooseAnimation("idle");
+  }
   if (nextState === "sleep") return manifest.animations.sleep_a_breathe || chooseAnimation("sleep") || chooseAnimation("idle");
   if (nextState === "fall_asleep") return manifest.animations.fall_asleep || manifest.animations.sleep_a_breathe || chooseAnimation("sleep");
   if (nextState === "wake") return manifest.animations.wake || manifest.animations.stretch || chooseAnimation("stretch") || chooseAnimation("idle");
@@ -114,11 +118,11 @@ function resolveAnimation(nextState) {
   if (nextState === "stretch") return manifest.animations.stretch || chooseAnimation("stretch");
   if (nextState === "drag") return manifest.animations.drag_sway || chooseAnimation("drag");
   if (nextState === "edge") return manifest.animations.edge_sit_breathe || chooseAnimation("edge");
-  if (nextState === "play") return manifest.animations.jump || manifest.animations.happy_a_bounce || chooseAnimation("happy");
   if (nextState === "curious") {
-    return manifest.animations.cursor_nearby ||
+    return manifest.animations.cursor_noticed ||
+      manifest.animations.cursor_nearby ||
+      manifest.animations.cursor_look ||
       manifest.animations.sit_look_tilt ||
-      manifest.animations.misc_question ||
       chooseAnimation("cursor") ||
       chooseAnimation("look") ||
       chooseAnimation("expression");
@@ -141,33 +145,92 @@ function stopAnimation() {
   animationToken++;
   clearTimeout(frameTimer);
   frameTimer = null;
+  currentAnimation = null;
 }
 
-function playAnimation(anim, token = animationToken) {
+function animationByKey(key) {
+  return key && manifest?.animations?.[key] ? manifest.animations[key] : null;
+}
+
+function nextTransition(anim) {
+  const choices = Array.isArray(anim?.transition_to) ? anim.transition_to : [];
+  const available = choices.map(animationByKey).filter(Boolean);
+  if (!available.length) return null;
+
+  // Prefer explicit transition targets, but never trap Mochi in a transition.
+  return available[Math.floor(Math.random() * available.length)];
+}
+
+function primeAnimation(anim, startIndex = 0) {
+  if (!anim?.frames?.length) return;
+  const count = Math.min(4, anim.frames.length);
+  for (let i = 0; i < count; i++) {
+    const frame = anim.frames[(startIndex + i) % anim.frames.length];
+    preload(`${ANIMATION_ROOT}/${anim.folder}/${frame}`);
+  }
+}
+
+function playAnimation(anim, token = animationToken, onComplete = null) {
   if (!anim || !anim.frames?.length || token !== animationToken) return;
 
   currentAnimation = anim;
   const fps = Math.max(1, Number(anim.fps) || 10);
   const delay = 1000 / fps;
-  const frame = anim.frames[currentFrame];
 
-  if (frame) {
-    const url = `${ANIMATION_ROOT}/${anim.folder}/${frame}`;
-    preload(url);
-    sprite.src = url;
-    applyDirection(anim);
-  }
+  const drawFrame = () => {
+    if (token !== animationToken || !currentAnimation) return;
 
-  currentFrame++;
-  if (currentFrame >= anim.frames.length) {
-    if (anim.loop) currentFrame = 0;
-    else {
-      currentFrame = anim.frames.length - 1;
+    const frame = anim.frames[currentFrame];
+    if (frame) {
+      const url = `${ANIMATION_ROOT}/${anim.folder}/${frame}`;
+      const img = preload(url);
+
+      // Decode before swapping where Chromium supports it, preventing visible
+      // blank-frame flashes when moving between hundreds of PNGs.
+      const commit = () => {
+        if (token !== animationToken || !currentAnimation) return;
+        sprite.src = url;
+        applyDirection(anim);
+
+        // Keep the next few frames hot in memory so movement stays continuous.
+        primeAnimation(anim, currentFrame + 1);
+      };
+
+      if (img.complete) commit();
+      else {
+        img.decode?.().then(commit).catch(commit);
+      }
+    }
+
+    currentFrame++;
+
+    if (currentFrame >= anim.frames.length) {
+      if (anim.loop) {
+        currentFrame = 0;
+        frameTimer = setTimeout(drawFrame, delay);
+        return;
+      }
+
+      const transition = nextTransition(anim);
+      if (transition) {
+        currentAnimation = transition;
+        currentFrame = 0;
+        primeAnimation(transition);
+        frameTimer = requestAnimationFrame(() => {
+          if (token === animationToken) playAnimation(transition, token, onComplete);
+        });
+      } else if (onComplete) {
+        onComplete();
+      }
       return;
     }
-  }
 
-  frameTimer = setTimeout(() => playAnimation(anim, token), delay);
+    frameTimer = setTimeout(drawFrame, delay);
+  };
+
+  currentFrame = Math.max(0, Math.min(currentFrame, anim.frames.length - 1));
+  primeAnimation(anim, currentFrame);
+  drawFrame();
 }
 
 function playState(nextState, force = false) {
@@ -176,12 +239,15 @@ function playState(nextState, force = false) {
     sprite.src = FALLBACK_SPRITE;
     return;
   }
+
   const same = currentAnimation?.frames?.[0] === anim.frames?.[0] &&
     currentAnimation?.folder === anim.folder;
+
   if (!force && same) return;
 
   stopAnimation();
   currentFrame = 0;
+  primeAnimation(anim);
   playAnimation(anim, animationToken);
 }
 
@@ -337,6 +403,12 @@ async function initAnimationLibrary() {
     const idle = manifest.animations?.idle_a_breathe;
     if (idle) {
       for (const frame of idle.frames) preload(`${ANIMATION_ROOT}/${idle.folder}/${frame}`);
+    }
+
+    // Warm the common loops immediately. Other states are decoded on demand
+    // and their next frames are kept warm by playAnimation().
+    for (const key of ["idle_a_breathe", "idle_b_breathe", "walk_normal", "walk_slow"]) {
+      if (manifest.animations?.[key]) primeAnimation(manifest.animations[key]);
     }
 
     playState(state, true);
