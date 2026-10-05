@@ -106,9 +106,15 @@ function resolveAnimation(nextState) {
 
   if (nextState === "idle") return chooseAnimation("idle");
   if (nextState === "sleep") return manifest.animations.sleep_a_breathe || chooseAnimation("sleep") || chooseAnimation("idle");
+  if (nextState === "fall_asleep") return manifest.animations.fall_asleep || manifest.animations.sleep_a_breathe || chooseAnimation("sleep");
+  if (nextState === "wake") return manifest.animations.wake || manifest.animations.stretch || chooseAnimation("stretch") || chooseAnimation("idle");
+  if (nextState === "pat") return manifest.animations.pat || chooseAnimation("happy");
+  if (nextState === "treat") return manifest.animations.treat || chooseAnimation("happy");
+  if (nextState === "play") return manifest.animations.jump || manifest.animations.happy_a_bounce || chooseAnimation("happy");
   if (nextState === "stretch") return manifest.animations.stretch || chooseAnimation("stretch");
   if (nextState === "drag") return manifest.animations.drag_sway || chooseAnimation("drag");
   if (nextState === "edge") return manifest.animations.edge_sit_breathe || chooseAnimation("edge");
+  if (nextState === "play") return manifest.animations.jump || manifest.animations.happy_a_bounce || chooseAnimation("happy");
   if (nextState === "curious") {
     return manifest.animations.cursor_nearby ||
       manifest.animations.sit_look_tilt ||
@@ -180,7 +186,7 @@ function playState(nextState, force = false) {
 }
 
 function setState(next) {
-  const allowed = ["idle", "walk", "sleep", "stretch", "drag", "edge", "curious", "sit", "stand", "happy", "sad", "annoyed", "surprise", "jump", "climb"];
+  const allowed = ["idle", "walk", "sleep", "fall_asleep", "wake", "pat", "treat", "play", "stretch", "drag", "drag_release", "edge", "curious", "sit", "stand", "happy", "sad", "annoyed", "surprise", "jump", "climb"];
   state = allowed.includes(next) ? next : "idle";
   pet.className = `mochi ${state}`;
   playState(state);
@@ -241,10 +247,18 @@ window.mochi.onPat(() => {
   }
 });
 
+window.mochi.onNeeds(data => {
+  if (!data) return;
+  pet.dataset.energy = data.energy;
+  pet.dataset.hunger = data.hunger;
+  pet.dataset.happiness = data.happiness;
+  pet.dataset.boredom = data.boredom;
+});
+
 window.mochi.onTreat(() => {
   burst("♥", 2);
   tinySound("treat");
-  const treatAnim = chooseAnimation("treat");
+  const treatAnim = manifest?.animations?.treat || chooseAnimation("treat");
   if (treatAnim) {
     stopAnimation();
     currentFrame = 0;
@@ -304,6 +318,12 @@ window.addEventListener("mousemove", event => {
 
 window.addEventListener("mouseup", event => {
   if (event.button !== 0 || !dragging) return;
+  dragging = false;
+  window.mochi.dragEnd();
+});
+
+window.addEventListener("blur", () => {
+  if (!dragging) return;
   dragging = false;
   window.mochi.dragEnd();
 });
