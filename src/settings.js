@@ -6,6 +6,7 @@ function render(data){
   $("napValue").textContent=`${Math.round(Number(settings.napDuration)/1000)}s`;
   $("affection").textContent=stats.affection||0;$("pats").textContent=stats.pats||0;$("naps").textContent=stats.naps||0;$("walks").textContent=stats.walks||0;$("treats").textContent=stats.treats||0;
   const a=Number(stats.affection||0);$("mood").textContent=a>=75?"♥":a>=40?"☺":a>=15?"◡":"♡";
+  if(data.needs) renderNeeds(data.needs);
 }
 function push(){
   const next={sounds:$("sounds").checked,wander:$("wander").checked,cursorAware:$("cursorAware").checked,notifications:$("notifications").checked,startWithWindows:$("startWithWindows").checked,personality:$("personality").value,napDuration:Number($("napDuration").value)*1000};
@@ -23,3 +24,10 @@ window.mochi.onNeeds(data=>{
     $(k+"Bar").style.width=v+"%";
   });
 });
+function renderNeeds(data){
+  ["energy","hunger","happiness","boredom"].forEach(k=>{
+    const v=Math.max(0,Math.min(100,Number(data[k]??0)));
+    if($(k)) $(k).textContent=Math.round(v)+"%";
+    if($(k+"Bar")) $(k+"Bar").style.width=v+"%";
+  });
+}
