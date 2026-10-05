@@ -4,7 +4,7 @@ function render(data){
   const {settings,stats}=data;
   ids.forEach(id=>{if($(id).type==="checkbox")$(id).checked=!!settings[id];else $(id).value=id==="napDuration"?Number(settings[id])/1000:settings[id]});
   $("napValue").textContent=`${Math.round(Number(settings.napDuration)/1000)}s`;
-  $("affection").textContent=stats.affection||0;$("pats").textContent=stats.pats||0;$("naps").textContent=stats.naps||0;$("walks").textContent=stats.walks||0;
+  $("affection").textContent=stats.affection||0;$("pats").textContent=stats.pats||0;$("naps").textContent=stats.naps||0;$("walks").textContent=stats.walks||0;$("treats").textContent=stats.treats||0;
   const a=Number(stats.affection||0);$("mood").textContent=a>=75?"♥":a>=40?"☺":a>=15?"◡":"♡";
 }
 function push(){
@@ -15,3 +15,11 @@ function push(){
 $("resetStats").addEventListener("click",()=>{if(confirm("Reset Mochi's affection and stats?"))window.mochi.resetStats()});
 $("close").addEventListener("click",()=>window.mochi.closeSettings());
 window.mochi.onSettings(render);window.mochi.requestSettings();
+window.mochi.onNeeds(data=>{
+  if(!data)return;
+  ["energy","hunger","happiness","boredom"].forEach(k=>{
+    const v=Math.max(0,Math.min(100,Number(data[k]??0)));
+    $(k).textContent=Math.round(v)+"%";
+    $(k+"Bar").style.width=v+"%";
+  });
+});
