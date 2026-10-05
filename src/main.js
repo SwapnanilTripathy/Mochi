@@ -108,6 +108,7 @@ function buildTrayMenu() {
     { label: paused ? "Resume wandering" : "Pause wandering", click: () => paused ? startMovement() : pauseMovement() },
     { label: "Take a nap", click: nap },
     { label: "Give Mochi a treat", click: giveTreat },
+    { label: "Play with Mochi", click: playWithMochi },
     { label: "Mochi Settings", click: openSettings },
     { type: "separator" },
     { label: "Reset position", click: resetPosition },
@@ -131,12 +132,14 @@ function send(state) {
   petWindow?.webContents.send("mochi-state", state);
 }
 function sendNeeds() {
-  petWindow?.webContents.send("mochi-needs", {
+  const needs = {
     energy: Math.round(energy),
     hunger: Math.round(hunger),
     happiness: Math.round(happiness),
     boredom: Math.round(boredom)
-  });
+  };
+  petWindow?.webContents.send("mochi-needs", needs);
+  settingsWindow?.webContents.send("mochi-needs", needs);
 }
 function lockInteraction(ms = 900) { interactionLockUntil = Date.now() + ms; }
 function sendSettings() {
@@ -384,6 +387,25 @@ function startBehaviorLoop() {
   }, 6500 + Math.random() * 9000);
 }
 
+function playWithMochi() {
+  if (sleeping) {
+    sleeping = false;
+    send("wake");
+    setTimeout(() => startMovement(), 900);
+    return;
+  }
+  happiness = Math.min(100, happiness + 10);
+  boredom = Math.max(0, boredom - 30);
+  energy = Math.max(0, energy - 3);
+  stats.playSessions++;
+  saveStats();
+  lockInteraction(1400);
+  send("play");
+  sendNeeds();
+  setTimeout(() => { if (!paused && !sleeping && !dragging) startMovement(); }, 1300);
+  sendSettings();
+}
+
 function giveTreat() {
   stats.treats++;
   stats.affection = Math.min(100, stats.affection + 4);
@@ -401,6 +423,20 @@ function giveTreat() {
 }
 
 function pat() {
+  if (sleeping) {
+    sleeping = false;
+    stats.pats++;
+    stats.affection = Math.min(100, stats.affection + 1);
+    happiness = Math.min(100, happiness + 3);
+    boredom = Math.max(0, boredom - 4);
+    saveStats();
+    lockInteraction(1000);
+    send("wake");
+    sendNeeds();
+    sendSettings();
+    setTimeout(() => { if (!paused && !dragging) startMovement(); }, 1000);
+    return;
+  }
   stats.pats++;
   stats.affection = Math.min(100, stats.affection + 2);
   stats.playSessions++;
@@ -494,6 +530,7 @@ function createPet() {
       { label: paused ? "Resume wandering" : "Pause wandering", click: () => paused ? startMovement() : pauseMovement() },
       { label: "Take a nap", click: nap },
       { label: "Give a treat", click: giveTreat },
+      { label: "Play with Mochi", click: playWithMochi },
       { label: "Mochi Settings", click: openSettings },
       { type: "separator" },
       { label: "Stay here", click: pauseMovement },
